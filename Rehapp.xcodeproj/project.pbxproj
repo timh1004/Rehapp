@@ -22,6 +22,7 @@
 		086DC6961B41A18500A7BAFF /* SensorData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086DC6951B41A18500A7BAFF /* SensorData.swift */; };
 		086DC6981B41A33C00A7BAFF /* SensorDataSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086DC6971B41A33C00A7BAFF /* SensorDataSession.swift */; };
 		086DC69B1B41B16000A7BAFF /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086DC69A1B41B16000A7BAFF /* SwiftyJSON.swift */; };
+		086DC69D1B41B18800A7BAFF /* FileHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086DC69C1B41B18800A7BAFF /* FileHandler.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +61,7 @@
 		086DC6971B41A33C00A7BAFF /* SensorDataSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SensorDataSession.swift; sourceTree = "<group>"; };
 		086DC6991B41B16000A7BAFF /* SwiftyJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwiftyJSON.h; sourceTree = "<group>"; };
 		086DC69A1B41B16000A7BAFF /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
+		086DC69C1B41B18800A7BAFF /* FileHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileHandler.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +109,7 @@
 				086DC65B1B418FCE00A7BAFF /* ViewController.swift */,
 				086DC65D1B418FCE00A7BAFF /* Main.storyboard */,
 				086DC6841B419C3400A7BAFF /* BLE */,
+				086DC69C1B41B18800A7BAFF /* FileHandler.swift */,
 				086DC6851B419D2800A7BAFF /* ArduinoCommunicationManager.swift */,
 				086DC6911B41A05C00A7BAFF /* SensorDataDelegate.swift */,
 				086DC6951B41A18500A7BAFF /* SensorData.swift */,
@@ -265,6 +268,7 @@
 				086DC69B1B41B16000A7BAFF /* SwiftyJSON.swift in Sources */,
 				086DC6861B419D2800A7BAFF /* ArduinoCommunicationManager.swift in Sources */,
 				086DC65C1B418FCE00A7BAFF /* ViewController.swift in Sources */,
+				086DC69D1B41B18800A7BAFF /* FileHandler.swift in Sources */,
 				086DC6831B419C2500A7BAFF /* BLEService.m in Sources */,
 				086DC6571B418FCE00A7BAFF /* AppDelegate.swift in Sources */,
 				086DC65A1B418FCE00A7BAFF /* Rehapp.xcdatamodeld in Sources */,
