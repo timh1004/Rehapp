@@ -14,6 +14,12 @@
 		086DC6611B418FCE00A7BAFF /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 086DC6601B418FCE00A7BAFF /* Images.xcassets */; };
 		086DC6641B418FCE00A7BAFF /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 086DC6621B418FCE00A7BAFF /* LaunchScreen.xib */; };
 		086DC6701B418FCF00A7BAFF /* RehappTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086DC66F1B418FCF00A7BAFF /* RehappTests.swift */; };
+		086DC6811B419C2500A7BAFF /* BLEDiscovery.m in Sources */ = {isa = PBXBuildFile; fileRef = 086DC67C1B419C2500A7BAFF /* BLEDiscovery.m */; };
+		086DC6821B419C2500A7BAFF /* BLEHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 086DC67E1B419C2500A7BAFF /* BLEHelper.m */; };
+		086DC6831B419C2500A7BAFF /* BLEService.m in Sources */ = {isa = PBXBuildFile; fileRef = 086DC6801B419C2500A7BAFF /* BLEService.m */; };
+		086DC6861B419D2800A7BAFF /* ArduinoCommunicationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086DC6851B419D2800A7BAFF /* ArduinoCommunicationManager.swift */; };
+		086DC6921B41A05C00A7BAFF /* SensorDataDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086DC6911B41A05C00A7BAFF /* SensorDataDelegate.swift */; };
+		086DC6961B41A18500A7BAFF /* SensorData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086DC6951B41A18500A7BAFF /* SensorData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +44,17 @@
 		086DC6691B418FCE00A7BAFF /* RehappTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RehappTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		086DC66E1B418FCF00A7BAFF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		086DC66F1B418FCF00A7BAFF /* RehappTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RehappTests.swift; sourceTree = "<group>"; };
+		086DC6791B419C2400A7BAFF /* Rehapp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Rehapp-Bridging-Header.h"; sourceTree = "<group>"; };
+		086DC67A1B419C2500A7BAFF /* BLE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLE.h; sourceTree = "<group>"; };
+		086DC67B1B419C2500A7BAFF /* BLEDiscovery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLEDiscovery.h; sourceTree = "<group>"; };
+		086DC67C1B419C2500A7BAFF /* BLEDiscovery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLEDiscovery.m; sourceTree = "<group>"; };
+		086DC67D1B419C2500A7BAFF /* BLEHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLEHelper.h; sourceTree = "<group>"; };
+		086DC67E1B419C2500A7BAFF /* BLEHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLEHelper.m; sourceTree = "<group>"; };
+		086DC67F1B419C2500A7BAFF /* BLEService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BLEService.h; sourceTree = "<group>"; };
+		086DC6801B419C2500A7BAFF /* BLEService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BLEService.m; sourceTree = "<group>"; };
+		086DC6851B419D2800A7BAFF /* ArduinoCommunicationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArduinoCommunicationManager.swift; sourceTree = "<group>"; };
+		086DC6911B41A05C00A7BAFF /* SensorDataDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SensorDataDelegate.swift; sourceTree = "<group>"; };
+		086DC6951B41A18500A7BAFF /* SensorData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SensorData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,10 +99,15 @@
 				086DC6561B418FCE00A7BAFF /* AppDelegate.swift */,
 				086DC65B1B418FCE00A7BAFF /* ViewController.swift */,
 				086DC65D1B418FCE00A7BAFF /* Main.storyboard */,
+				086DC6841B419C3400A7BAFF /* BLE */,
+				086DC6851B419D2800A7BAFF /* ArduinoCommunicationManager.swift */,
+				086DC6911B41A05C00A7BAFF /* SensorDataDelegate.swift */,
+				086DC6951B41A18500A7BAFF /* SensorData.swift */,
 				086DC6601B418FCE00A7BAFF /* Images.xcassets */,
 				086DC6621B418FCE00A7BAFF /* LaunchScreen.xib */,
 				086DC6581B418FCE00A7BAFF /* Rehapp.xcdatamodeld */,
 				086DC6541B418FCE00A7BAFF /* Supporting Files */,
+				086DC6791B419C2400A7BAFF /* Rehapp-Bridging-Header.h */,
 			);
 			path = Rehapp;
 			sourceTree = "<group>";
@@ -113,6 +135,20 @@
 				086DC66E1B418FCF00A7BAFF /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		086DC6841B419C3400A7BAFF /* BLE */ = {
+			isa = PBXGroup;
+			children = (
+				086DC67A1B419C2500A7BAFF /* BLE.h */,
+				086DC67B1B419C2500A7BAFF /* BLEDiscovery.h */,
+				086DC67C1B419C2500A7BAFF /* BLEDiscovery.m */,
+				086DC67D1B419C2500A7BAFF /* BLEHelper.h */,
+				086DC67E1B419C2500A7BAFF /* BLEHelper.m */,
+				086DC67F1B419C2500A7BAFF /* BLEService.h */,
+				086DC6801B419C2500A7BAFF /* BLEService.m */,
+			);
+			name = BLE;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -215,9 +251,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				086DC6821B419C2500A7BAFF /* BLEHelper.m in Sources */,
+				086DC6811B419C2500A7BAFF /* BLEDiscovery.m in Sources */,
+				086DC6921B41A05C00A7BAFF /* SensorDataDelegate.swift in Sources */,
+				086DC6861B419D2800A7BAFF /* ArduinoCommunicationManager.swift in Sources */,
 				086DC65C1B418FCE00A7BAFF /* ViewController.swift in Sources */,
+				086DC6831B419C2500A7BAFF /* BLEService.m in Sources */,
 				086DC6571B418FCE00A7BAFF /* AppDelegate.swift in Sources */,
 				086DC65A1B418FCE00A7BAFF /* Rehapp.xcdatamodeld in Sources */,
+				086DC6961B41A18500A7BAFF /* SensorData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -344,9 +386,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = Rehapp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Rehapp/Rehapp-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -354,9 +399,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = Rehapp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Rehapp/Rehapp-Bridging-Header.h";
 			};
 			name = Release;
 		};
