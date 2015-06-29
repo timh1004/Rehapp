@@ -20,6 +20,7 @@
 		086DC6861B419D2800A7BAFF /* ArduinoCommunicationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086DC6851B419D2800A7BAFF /* ArduinoCommunicationManager.swift */; };
 		086DC6921B41A05C00A7BAFF /* SensorDataDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086DC6911B41A05C00A7BAFF /* SensorDataDelegate.swift */; };
 		086DC6961B41A18500A7BAFF /* SensorData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086DC6951B41A18500A7BAFF /* SensorData.swift */; };
+		086DC6981B41A33C00A7BAFF /* SensorDataSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086DC6971B41A33C00A7BAFF /* SensorDataSession.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		086DC6851B419D2800A7BAFF /* ArduinoCommunicationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArduinoCommunicationManager.swift; sourceTree = "<group>"; };
 		086DC6911B41A05C00A7BAFF /* SensorDataDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SensorDataDelegate.swift; sourceTree = "<group>"; };
 		086DC6951B41A18500A7BAFF /* SensorData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SensorData.swift; sourceTree = "<group>"; };
+		086DC6971B41A33C00A7BAFF /* SensorDataSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SensorDataSession.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +105,7 @@
 				086DC6851B419D2800A7BAFF /* ArduinoCommunicationManager.swift */,
 				086DC6911B41A05C00A7BAFF /* SensorDataDelegate.swift */,
 				086DC6951B41A18500A7BAFF /* SensorData.swift */,
+				086DC6971B41A33C00A7BAFF /* SensorDataSession.swift */,
 				086DC6601B418FCE00A7BAFF /* Images.xcassets */,
 				086DC6621B418FCE00A7BAFF /* LaunchScreen.xib */,
 				086DC6581B418FCE00A7BAFF /* Rehapp.xcdatamodeld */,
@@ -259,6 +262,7 @@
 				086DC6831B419C2500A7BAFF /* BLEService.m in Sources */,
 				086DC6571B418FCE00A7BAFF /* AppDelegate.swift in Sources */,
 				086DC65A1B418FCE00A7BAFF /* Rehapp.xcdatamodeld in Sources */,
+				086DC6981B41A33C00A7BAFF /* SensorDataSession.swift in Sources */,
 				086DC6961B41A18500A7BAFF /* SensorData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

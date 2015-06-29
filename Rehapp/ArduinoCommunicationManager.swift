@@ -19,7 +19,7 @@ class ArduinoCommunicationManager: NSObject, BLEDiscoveryDelegate, BLEServiceDel
     class var sharedInstance: ArduinoCommunicationManager {
         return _SharedInstance
     }
-    S
+
     var sensorDataDelegate: SensorDataDelegate? = nil
     
     override init() {
@@ -115,21 +115,21 @@ class ArduinoCommunicationManager: NSObject, BLEDiscoveryDelegate, BLEServiceDel
         if (length == 14 && self.sensorDataDelegate != nil) {
             let sensorTimestampInMilliseconds =  transformReceivedUIntsToInt([data[12], data[13]])
             
-            let linearAccelerationX = transformReceivedBytesIntoInt([data[0], data[1]])
-            let linearAccelerationY = transformReceivedBytesIntoInt([data[2], data[3]])
-            let linearAccelerationZ = transformReceivedBytesIntoInt([data[4], data[5]])
-            let linearAcceleration = LinearAcceleration(x: linearAccelerationX, y: linearAccelerationY, z: linearAccelerationZ)
+//            let linearAccelerationX = transformReceivedBytesIntoInt([data[0], data[1]])
+//            let linearAccelerationY = transformReceivedBytesIntoInt([data[2], data[3]])
+//            let linearAccelerationZ = transformReceivedBytesIntoInt([data[4], data[5]])
+//            let linearAcceleration = LinearAcceleration(x: linearAccelerationX, y: linearAccelerationY, z: linearAccelerationZ)
+//            
+//            let rawAccelerationX = transformReceivedBytesIntoInt([data[6], data[7]])
+//            let rawAccelerationY = transformReceivedBytesIntoInt([data[8], data[9]])
+//            let rawAccelerationZ = transformReceivedBytesIntoInt([data[10], data[11]])
+//            let rawAcceleration = RawAcceleration(x: rawAccelerationX, y: rawAccelerationY, z: rawAccelerationZ)
             
-            let rawAccelerationX = transformReceivedBytesIntoInt([data[6], data[7]])
-            let rawAccelerationY = transformReceivedBytesIntoInt([data[8], data[9]])
-            let rawAccelerationZ = transformReceivedBytesIntoInt([data[10], data[11]])
-            let rawAcceleration = RawAcceleration(x: rawAccelerationX, y: rawAccelerationY, z: rawAccelerationZ)
+//            let sensorData = SensorData(sensorTimeStamp: sensorTimestampInMilliseconds, rawAcceleration: rawAcceleration, linearAcceleration: linearAcceleration)
             
-            let sensorData = SensorData(sensorTimeStamp: sensorTimestampInMilliseconds, rawAcceleration: rawAcceleration, linearAcceleration: linearAcceleration)
-            
-            if let delegate = self.sensorDataDelegate {
-                delegate.didReceiveData(sensorData)
-            }
+//            if let delegate = self.sensorDataDelegate {
+//                delegate.didReceiveData(sensorData)
+//            }
         }
     }
     

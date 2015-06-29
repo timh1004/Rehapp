@@ -1,9 +1,9 @@
 //
 //  SensorDataDelegate.swift
-//  JumpAnalysis
+//  Rehapp
 //
-//  Created by Lukas Welte on 19.01.15.
-//  Copyright (c) 2015 Lukas Welte. All rights reserved.
+//  Created by Tim Haug on 29.06.15.
+//  Copyright (c) 2015 Tim Haug. All rights reserved.
 //
 
 protocol SensorDataDelegate {
