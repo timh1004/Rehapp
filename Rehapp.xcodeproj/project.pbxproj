@@ -21,6 +21,7 @@
 		086DC6921B41A05C00A7BAFF /* SensorDataDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086DC6911B41A05C00A7BAFF /* SensorDataDelegate.swift */; };
 		086DC6961B41A18500A7BAFF /* SensorData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086DC6951B41A18500A7BAFF /* SensorData.swift */; };
 		086DC6981B41A33C00A7BAFF /* SensorDataSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086DC6971B41A33C00A7BAFF /* SensorDataSession.swift */; };
+		086DC69B1B41B16000A7BAFF /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086DC69A1B41B16000A7BAFF /* SwiftyJSON.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +58,8 @@
 		086DC6911B41A05C00A7BAFF /* SensorDataDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SensorDataDelegate.swift; sourceTree = "<group>"; };
 		086DC6951B41A18500A7BAFF /* SensorData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SensorData.swift; sourceTree = "<group>"; };
 		086DC6971B41A33C00A7BAFF /* SensorDataSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SensorDataSession.swift; sourceTree = "<group>"; };
+		086DC6991B41B16000A7BAFF /* SwiftyJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwiftyJSON.h; sourceTree = "<group>"; };
+		086DC69A1B41B16000A7BAFF /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +101,8 @@
 		086DC6531B418FCE00A7BAFF /* Rehapp */ = {
 			isa = PBXGroup;
 			children = (
+				086DC6991B41B16000A7BAFF /* SwiftyJSON.h */,
+				086DC69A1B41B16000A7BAFF /* SwiftyJSON.swift */,
 				086DC6561B418FCE00A7BAFF /* AppDelegate.swift */,
 				086DC65B1B418FCE00A7BAFF /* ViewController.swift */,
 				086DC65D1B418FCE00A7BAFF /* Main.storyboard */,
@@ -257,6 +262,7 @@
 				086DC6821B419C2500A7BAFF /* BLEHelper.m in Sources */,
 				086DC6811B419C2500A7BAFF /* BLEDiscovery.m in Sources */,
 				086DC6921B41A05C00A7BAFF /* SensorDataDelegate.swift in Sources */,
+				086DC69B1B41B16000A7BAFF /* SwiftyJSON.swift in Sources */,
 				086DC6861B419D2800A7BAFF /* ArduinoCommunicationManager.swift in Sources */,
 				086DC65C1B418FCE00A7BAFF /* ViewController.swift in Sources */,
 				086DC6831B419C2500A7BAFF /* BLEService.m in Sources */,
