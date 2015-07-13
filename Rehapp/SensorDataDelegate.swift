@@ -7,5 +7,5 @@
 //
 
 protocol SensorDataDelegate {
-    func didReceiveData(SensorData)
+    func didReceiveData(_: SensorData)
 }

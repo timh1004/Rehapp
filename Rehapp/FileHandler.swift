@@ -12,8 +12,8 @@ class FileHandler {
     private class func getDocumentDirectoryPath() -> String {
         //get the documents directory:
         let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true);
-        let documentsDirectory: String? = paths.first as? String
-        return documentsDirectory!
+        let documentsDirectory = paths[0]
+        return documentsDirectory
     }
     
     private class func getFilePathForFileName(fileName: String) -> String {
@@ -22,14 +22,22 @@ class FileHandler {
     
     class func writeToFile(fileName: String, content: String) {
         var error: NSError?
-        let written = content.writeToFile(FileHandler.getFilePathForFileName(fileName), atomically: false, encoding: NSUTF8StringEncoding, error: &error)
+        let written: Bool
+        do {
+            try content.writeToFile(FileHandler.getFilePathForFileName(fileName), atomically: false, encoding: NSUTF8StringEncoding)
+            written = true
+        } catch let error1 as NSError {
+            error = error1
+            written = false
+        }
         
         if let actualError = error {
-            println("Error writing JSON to file: \(actualError)")
+            print("Error writing JSON to file: \(actualError)")
         }
         
         if (written) {
             let writtenContent = FileHandler.readFromFile(fileName)
+            print(writtenContent)
         }
     }
     
@@ -38,9 +46,14 @@ class FileHandler {
     }
     
     class func readFileFromPath(path: String) -> String {
-        let fileContent = NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding, error: nil)
+        let fileContent: NSString?
+        do {
+            fileContent = try NSString(contentsOfFile: path, encoding: NSUTF8StringEncoding)
+        } catch _ {
+            fileContent = nil
+        }
         if let content = fileContent {
-            return content as! String
+            return content as String
         } else {
             return ""
         }

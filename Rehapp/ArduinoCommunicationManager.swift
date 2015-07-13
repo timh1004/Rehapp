@@ -106,37 +106,46 @@ class ArduinoCommunicationManager: NSObject, BLEDiscoveryDelegate, BLEServiceDel
     }
     
     func reportMessage(message: String!) {
-        println("BLE Message: \(message)")
+        print("BLE Message: \(message)")
     }
     
     //MARK: BLEServiceData Delegate
     
     func didReceiveData(data: UnsafeMutablePointer<UInt8>, length: Int) {
-        if (length == 14 && self.sensorDataDelegate != nil) {
-            let sensorTimestampInMilliseconds =  transformReceivedUIntsToInt([data[12], data[13]])
+        print("Length :\(length)")
+        
+        
+        if (length == 8) {
             
-//            let linearAccelerationX = transformReceivedBytesIntoInt([data[0], data[1]])
-//            let linearAccelerationY = transformReceivedBytesIntoInt([data[2], data[3]])
-//            let linearAccelerationZ = transformReceivedBytesIntoInt([data[4], data[5]])
-//            let linearAcceleration = LinearAcceleration(x: linearAccelerationX, y: linearAccelerationY, z: linearAccelerationZ)
-//            
-//            let rawAccelerationX = transformReceivedBytesIntoInt([data[6], data[7]])
-//            let rawAccelerationY = transformReceivedBytesIntoInt([data[8], data[9]])
-//            let rawAccelerationZ = transformReceivedBytesIntoInt([data[10], data[11]])
-//            let rawAcceleration = RawAcceleration(x: rawAccelerationX, y: rawAccelerationY, z: rawAccelerationZ)
-            
-//            let sensorData = SensorData(sensorTimeStamp: sensorTimestampInMilliseconds, rawAcceleration: rawAcceleration, linearAcceleration: linearAcceleration)
-            
-//            if let delegate = self.sensorDataDelegate {
-//                delegate.didReceiveData(sensorData)
-//            }
+            for var i = 0; i < length; i++ {
+                let sensor1Force = transformReceivedBytesIntoInt([data[0], data[1]])
+                let sensor2Force = transformReceivedBytesIntoInt([data[2], data[3]])
+                let sensor3Force = transformReceivedBytesIntoInt([data[4], data[5]])
+                
+                let sensorTimestampInMilliseconds =  transformReceivedUIntsToInt([data[6], data[7]])
+                
+                print("sensor1Force: \(sensor1Force)")
+                print("sensor2Force: \(sensor2Force)")
+                print("sensor3Force: \(sensor3Force)")
+                print("time: \(sensorTimestampInMilliseconds)")
+                
+                let sensorData = SensorData(sensorTimeStamp: sensorTimestampInMilliseconds, sensor1Force: sensor1Force, sensor2Force: sensor2Force, sensor3Force: sensor3Force)
+                
+                if let delegate = self.sensorDataDelegate {
+                    delegate.didReceiveData(sensorData)
+                }
+            }
         }
     }
     
+    
     func transformReceivedUIntsToInt(inputData: [UInt8]) -> Int {
+        
         let data = NSData(bytes: inputData, length: inputData.count)
         
-        var u16 : UInt16 = 0 ;
+//        var u16 = UnsafePointer<UInt16>(data).memory
+//        println("u16: \(u16)")
+        var u16: UInt16 = 0
         data.getBytes(&u16)
         
         return Int(u16)
@@ -147,106 +156,3 @@ class ArduinoCommunicationManager: NSObject, BLEDiscoveryDelegate, BLEServiceDel
     }
 
 }
-
-//#import "MainViewController.h"
-//
-//@implementation MainViewController
-//
-//- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-//{
-//    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
-//    if (self) {
-//        // Custom initialization
-//    }
-//    return self;
-//    }
-//    
-//    - (void)viewDidLoad
-//        {
-//            [super viewDidLoad];
-//            
-//            // Do any additional setup after loading the view.
-//            [BLEDiscovery sharedInstance].peripheralDelegate = self;
-//            [BLEDiscovery sharedInstance].discoveryDelegate = self;
-//            [[BLEDiscovery sharedInstance] startScanningForSupportedUUIDs];
-//        }
-//        
-//        - (void)didReceiveMemoryWarning
-//            {
-//                [super didReceiveMemoryWarning];
-//                // Dispose of any resources that can be recreated.
-//            }
-//            
-//            - (IBAction) sendTapped:(id)sender {
-//                uint8_t buf[16];
-//                for (int i = 0; i < 15; i++) {
-//                    buf[i] = (uint8_t)65+i;
-//                    
-//                }
-//                buf[15] = '\n';
-//                
-//                BLEService * service = [BLEDiscovery sharedInstance].connectedService;
-//                if(!service){
-//                    NSLog(@"no service!");
-//                }
-//                [service writeToTx:[NSData dataWithBytes:buf length:1]];
-//}
-
-//-(void) updateConnectedLabel{
-//    if([BLEDiscovery sharedInstance].connectedService){
-//        self.connectedLabel.text = @"CONNECTED";
-//    } else {
-//        self.connectedLabel.text = @"NOT CONNECTED";
-//    }
-//}
-
-//MARK: BleServiceDataDelegate
-
-//-(void) didReceiveData:(uint8_t *)buffer lenght:(NSInteger)length{
-//    
-//    NSString * text = @"";
-//    for (int i = 0 ; i < length; i++) {
-//        int value = buffer[i];
-//        text = [text stringByAppendingFormat:@"%d ",value];
-//    }
-//    
-//    //NSLog(@"%@",text);
-//    
-//    self.receivedLabel.text = text;
-//}
-
-//MARK: BleDiscoveryDelegate
-
-//- (void) discoveryDidRefresh {
-//    }
-//    
-//    - (void) peripheralDiscovered:(CBPeripheral*) peripheral {
-//        if([BLEDiscovery sharedInstance].connectedService == nil){
-//            [[BLEDiscovery sharedInstance] connectPeripheral:peripheral];
-//        }
-//        }
-//        
-//        - (void) discoveryStatePoweredOff {
-//}
-
-// MARK: BleServiceProtocol
-
-//-(void) bleServiceDidConnect:(BLEService *)service{
-//    service.delegate = self;
-//    service.dataDelegate = self;
-//    [self updateConnectedLabel];
-//}
-//
-//-(void) bleServiceDidDisconnect:(BLEService *)service{
-//    [self updateConnectedLabel];
-//}
-//
-//-(void) bleServiceIsReady:(BLEService *)service{
-//    
-//}
-//
-//-(void) bleServiceDidReset {
-//}
-//
-//-(void) reportMessage:(NSString*) message{
-//}
