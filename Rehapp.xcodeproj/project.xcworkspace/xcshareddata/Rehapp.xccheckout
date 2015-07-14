@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>793FD8BE-1D0C-464D-88BB-141D17CA1EE2</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Rehapp</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>F422B0ECA75315A10BF5D0F9298741F95112380B</key>
+		<string>https://github.com/timh1004/Rehapp.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Rehapp.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>F422B0ECA75315A10BF5D0F9298741F95112380B</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/timh1004/Rehapp.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>F422B0ECA75315A10BF5D0F9298741F95112380B</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>F422B0ECA75315A10BF5D0F9298741F95112380B</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Rehapp</string>
+		</dict>
+	</array>
+</dict>
+</plist>
