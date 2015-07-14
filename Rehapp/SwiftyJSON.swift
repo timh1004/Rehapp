@@ -68,8 +68,8 @@ public struct JSON {
         do {
             let object: AnyObject = try NSJSONSerialization.JSONObjectWithData(data, options: opt)
             self.init(object)
-        } catch let error1 as NSError {
-            error.memory = error1
+        } catch let aError as NSError {
+            error.memory = aError
             self.init(NSNull())
         }
     }
@@ -83,6 +83,17 @@ public struct JSON {
     */
     public init(_ object: AnyObject) {
         self.object = object
+    }
+
+    /**
+    Creates a JSON from a [JSON]
+    
+    - parameter jsonArray: A Swift array of JSON objects
+    
+    - returns: The created JSON
+    */
+    public init(_ jsonArray:[JSON]) {
+        self.init(jsonArray.map { $0.object })
     }
 
     /// Private object
@@ -106,13 +117,13 @@ public struct JSON {
                 } else {
                     _type = .Number
                 }
-            case let string as NSString:
+            case  _ as NSString:
                 _type = .String
-            case let null as NSNull:
+            case  _ as NSNull:
                 _type = .Null
-            case let array as [AnyObject]:
+            case _ as [AnyObject]:
                 _type = .Array
-            case let dictionary as [String : AnyObject]:
+            case _ as [String : AnyObject]:
                 _type = .Dictionary
             default:
                 _type = .Unknown
@@ -129,12 +140,13 @@ public struct JSON {
     public var error: NSError? { get { return self._error } }
     
     /// The static null json
-    public static var nullJSON: JSON { get { return JSON(NSNull()) } }
-
+    @available(*, unavailable, renamed="null")
+    public static var nullJSON: JSON { get { return null } }
+    public static var null: JSON { get { return JSON(NSNull()) } }
 }
 
 // MARK: - SequenceType
-extension JSON: SequenceType{
+extension JSON : Swift.SequenceType {
     
     /// If `type` is `.Array` or `.Dictionary`, return `array.empty` or `dictonary.empty` otherwise return `false`.
     public var isEmpty: Bool {
@@ -165,7 +177,7 @@ extension JSON: SequenceType{
     }
     
     /**
-    If `type` is `.Array` or `.Dictionary`, return a generator over the elements like `Array` or `Dictionary, otherwise return a generator over empty.
+    If `type` is `.Array` or `.Dictionary`, return a generator over the elements like `Array` or `Dictionary`, otherwise return a generator over empty.
     
     - returns: Return a *generator* over the elements of this *sequence*.
     */
@@ -218,7 +230,7 @@ extension JSON {
         get {
             
             if self.type != .Array {
-                var errorResult_ = JSON.nullJSON
+                var errorResult_ = JSON.null
                 errorResult_._error = self._error ?? NSError(domain: ErrorDomain, code: ErrorWrongType, userInfo: [NSLocalizedDescriptionKey: "Array[\(index)] failure, It is not an array"])
                 return errorResult_
             }
@@ -229,7 +241,7 @@ extension JSON {
                 return JSON(array_[index])
             }
             
-            var errorResult_ = JSON.nullJSON
+            var errorResult_ = JSON.null
             errorResult_._error = NSError(domain: ErrorDomain, code:ErrorIndexOutOfBounds , userInfo: [NSLocalizedDescriptionKey: "Array[\(index)] is out of bounds"])
             return errorResult_
         }
@@ -247,9 +259,10 @@ extension JSON {
     /// If `type` is `.Dictionary`, return json which's object is `dictionary[key]` , otherwise return null json with error.
     private subscript(key key: String) -> JSON {
         get {
-            var returnJSON = JSON.nullJSON
+            var returnJSON = JSON.null
             if self.type == .Dictionary {
-                if let object_: AnyObject = self.object[key] {
+                let dictionary_ = self.object as! [String : AnyObject]
+                if let object_: AnyObject = dictionary_[key] {
                     returnJSON = JSON(object_)
                 } else {
                     returnJSON._error = NSError(domain: ErrorDomain, code: ErrorNotExist, userInfo: [NSLocalizedDescriptionKey: "Dictionary[\"\(key)\"] does not exist"])
@@ -301,35 +314,24 @@ extension JSON {
     */
     public subscript(path: [SubscriptType]) -> JSON {
         get {
-            if path.count == 0 {
-                return JSON.nullJSON
+            switch path.count {
+            case 0: return JSON.null
+            case 1: return self[sub: path[0]]
+            default:
+                var aPath = path; aPath.removeAtIndex(0)
+                let nextJSON = self[sub: path[0]]
+                return nextJSON[aPath]
             }
-            
-            var next = self
-            for sub in path {
-                next = next[sub:sub]
-            }
-            return next
         }
         set {
-            
             switch path.count {
             case 0: return
-            case 1: self[sub:path[0]] = newValue
+            case 1: self[sub:path[0]].object = newValue.object
             default:
-                var last = newValue
-                var newPath = path
-                newPath.removeLast()
-                for sub in Array(path.reverse()) {
-                    var previousLast = self[newPath]
-                    previousLast[sub:sub] = last
-                    last = previousLast
-                    if newPath.count <= 1 {
-                        break
-                    }
-                    newPath.removeLast()
-                }
-                self[sub:newPath[0]] = last
+                var aPath = path; aPath.removeAtIndex(0)
+                var nextJSON = self[sub: path[0]]
+                nextJSON[aPath] = newValue
+                self[sub: path[0]] = nextJSON
             }
         }
     }
@@ -357,7 +359,7 @@ extension JSON {
 
 // MARK: - LiteralConvertible
 
-extension JSON: StringLiteralConvertible {
+extension JSON: Swift.StringLiteralConvertible {
 	
 	public init(stringLiteral value: StringLiteralType) {
 		self.init(value)
@@ -372,28 +374,28 @@ extension JSON: StringLiteralConvertible {
 	}
 }
 
-extension JSON: IntegerLiteralConvertible {
+extension JSON: Swift.IntegerLiteralConvertible {
 
 	public init(integerLiteral value: IntegerLiteralType) {
 		self.init(value)
 	}
 }
 
-extension JSON: BooleanLiteralConvertible {
+extension JSON: Swift.BooleanLiteralConvertible {
 	
 	public init(booleanLiteral value: BooleanLiteralType) {
 		self.init(value)
 	}
 }
 
-extension JSON: FloatLiteralConvertible {
+extension JSON: Swift.FloatLiteralConvertible {
 	
 	public init(floatLiteral value: FloatLiteralType) {
 		self.init(value)
 	}
 }
 
-extension JSON: DictionaryLiteralConvertible {
+extension JSON: Swift.DictionaryLiteralConvertible {
 	
 	public init(dictionaryLiteral elements: (String, AnyObject)...) {
 		var dictionary_ = [String : AnyObject]()
@@ -404,14 +406,14 @@ extension JSON: DictionaryLiteralConvertible {
 	}
 }
 
-extension JSON: ArrayLiteralConvertible {
+extension JSON: Swift.ArrayLiteralConvertible {
 	
 	public init(arrayLiteral elements: AnyObject...) {
 		self.init(elements)
 	}
 }
 
-extension JSON: NilLiteralConvertible {
+extension JSON: Swift.NilLiteralConvertible {
 	
 	public init(nilLiteral: ()) {
 		self.init(NSNull())
@@ -420,7 +422,7 @@ extension JSON: NilLiteralConvertible {
 
 // MARK: - Raw
 
-extension JSON: RawRepresentable {
+extension JSON: Swift.RawRepresentable {
 	
 	public init?(rawValue: AnyObject) {
 		if JSON(rawValue).type == .Unknown {
@@ -443,7 +445,7 @@ extension JSON: RawRepresentable {
         case .Array, .Dictionary:
             do {
                 let data = try self.rawData(options: opt)
-                return (NSString(data: data, encoding: encoding) as! String)
+                return NSString(data: data, encoding: encoding) as? String
             } catch _ {
                 return nil
             }
@@ -463,7 +465,7 @@ extension JSON: RawRepresentable {
 
 // MARK: - Printable, DebugPrintable
 
-extension JSON: CustomStringConvertible, CustomDebugStringConvertible {
+extension JSON: Swift.Printable, Swift.DebugPrintable {
     
     public var description: String {
         if let string = self.rawString(options:.PrettyPrinted) {
@@ -572,7 +574,7 @@ extension JSON {
 
 // MARK: - Bool
 
-extension JSON: BooleanType {
+extension JSON: Swift.BooleanType {
     
     //Optional bool
     public var bool: Bool? {
@@ -1005,7 +1007,7 @@ extension JSON {
 }
 
 //MARK: - Comparable
-extension JSON: Comparable {}
+extension JSON: Swift.Comparable {}
 
 public func ==(lhs: JSON, rhs: JSON) -> Bool {
     
@@ -1098,11 +1100,12 @@ private let falseObjCType = String.fromCString(falseNumber.objCType)
 
 // MARK: - NSNumber: Comparable
 
-extension NSNumber: Comparable {
+extension NSNumber: Swift.Comparable {
     var isBool:Bool {
         get {
             let objCType = String.fromCString(self.objCType)
-            if (self.compare(trueNumber) == NSComparisonResult.OrderedSame &&  objCType == trueObjCType) ||  (self.compare(falseNumber) == NSComparisonResult.OrderedSame && objCType == falseObjCType){
+            if (self.compare(trueNumber) == NSComparisonResult.OrderedSame && objCType == trueObjCType)
+                || (self.compare(falseNumber) == NSComparisonResult.OrderedSame && objCType == falseObjCType){
                 return true
             } else {
                 return false

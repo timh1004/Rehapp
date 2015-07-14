@@ -112,22 +112,36 @@ class ArduinoCommunicationManager: NSObject, BLEDiscoveryDelegate, BLEServiceDel
     //MARK: BLEServiceData Delegate
     
     func didReceiveData(data: UnsafeMutablePointer<UInt8>, length: Int) {
-        print("Length :\(length)")
+//        print("Length :\(length)")
         
         
         if (length == 8) {
             
             for var i = 0; i < length; i++ {
-                let sensor1Force = transformReceivedBytesIntoInt([data[0], data[1]])
-                let sensor2Force = transformReceivedBytesIntoInt([data[2], data[3]])
-                let sensor3Force = transformReceivedBytesIntoInt([data[4], data[5]])
+                
+//                print("Data0: \(data[0])")
+//                print("Data1: \(data[1])")
+//                print("Data2: \(data[2])")
+//                print("Data3: \(data[3])")
+//                print("Data4: \(data[4])")
+//                print("Data5: \(data[5])")
+                
+                
+                let sensor1Force = transformReceivedUIntsToInt([data[0], data[1]])
+                let sensor2Force = transformReceivedUIntsToInt([data[2], data[3]])
+                let sensor3Force = transformReceivedUIntsToInt([data[4], data[5]])
                 
                 let sensorTimestampInMilliseconds =  transformReceivedUIntsToInt([data[6], data[7]])
                 
-                print("sensor1Force: \(sensor1Force)")
-                print("sensor2Force: \(sensor2Force)")
-                print("sensor3Force: \(sensor3Force)")
-                print("time: \(sensorTimestampInMilliseconds)")
+                
+//                print(sensorTimestampInMilliseconds)
+//                print(transformReceivedBytesIntoInt)
+                
+                
+//                print("sensor1Force: \(sensor1Force)")
+//                print("sensor2Force: \(sensor2Force)")
+//                print("sensor3Force: \(sensor3Force)")
+//                print("time: \(sensorTimestampInMilliseconds)")
                 
                 let sensorData = SensorData(sensorTimeStamp: sensorTimestampInMilliseconds, sensor1Force: sensor1Force, sensor2Force: sensor2Force, sensor3Force: sensor3Force)
                 

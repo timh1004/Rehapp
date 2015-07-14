@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		080D95F71B53E2730056EC69 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080D95F61B53E2730056EC69 /* SwiftyJSON.swift */; };
 		086DC6571B418FCE00A7BAFF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086DC6561B418FCE00A7BAFF /* AppDelegate.swift */; };
 		086DC65A1B418FCE00A7BAFF /* Rehapp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 086DC6581B418FCE00A7BAFF /* Rehapp.xcdatamodeld */; };
 		086DC65C1B418FCE00A7BAFF /* JumpRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086DC65B1B418FCE00A7BAFF /* JumpRecordViewController.swift */; };
@@ -21,8 +22,11 @@
 		086DC6921B41A05C00A7BAFF /* SensorDataDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086DC6911B41A05C00A7BAFF /* SensorDataDelegate.swift */; };
 		086DC6961B41A18500A7BAFF /* SensorData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086DC6951B41A18500A7BAFF /* SensorData.swift */; };
 		086DC6981B41A33C00A7BAFF /* SensorDataSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086DC6971B41A33C00A7BAFF /* SensorDataSession.swift */; };
-		086DC69B1B41B16000A7BAFF /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086DC69A1B41B16000A7BAFF /* SwiftyJSON.swift */; };
 		086DC69D1B41B18800A7BAFF /* FileHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086DC69C1B41B18800A7BAFF /* FileHandler.swift */; };
+		08D52CDB1B5509CD0085D3C9 /* SwiftCharts in Resources */ = {isa = PBXBuildFile; fileRef = 08D52CDA1B5509CD0085D3C9 /* SwiftCharts */; };
+		08F6675A1B54309F00E66A4F /* soles.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 08F667591B54309F00E66A4F /* soles.jpg */; };
+		08F6675C1B54476800E66A4F /* RecordingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F6675B1B54476800E66A4F /* RecordingsViewController.swift */; };
+		08F667601B54FC5600E66A4F /* RecordingDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F6675F1B54FC5600E66A4F /* RecordingDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		080D95F61B53E2730056EC69 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		086DC6511B418FCE00A7BAFF /* Rehapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rehapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		086DC6551B418FCE00A7BAFF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		086DC6561B418FCE00A7BAFF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -60,8 +65,11 @@
 		086DC6951B41A18500A7BAFF /* SensorData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SensorData.swift; sourceTree = "<group>"; };
 		086DC6971B41A33C00A7BAFF /* SensorDataSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SensorDataSession.swift; sourceTree = "<group>"; };
 		086DC6991B41B16000A7BAFF /* SwiftyJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwiftyJSON.h; sourceTree = "<group>"; };
-		086DC69A1B41B16000A7BAFF /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		086DC69C1B41B18800A7BAFF /* FileHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileHandler.swift; sourceTree = "<group>"; };
+		08D52CDA1B5509CD0085D3C9 /* SwiftCharts */ = {isa = PBXFileReference; lastKnownFileType = folder; path = SwiftCharts; sourceTree = "<group>"; };
+		08F667591B54309F00E66A4F /* soles.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = soles.jpg; sourceTree = "<group>"; };
+		08F6675B1B54476800E66A4F /* RecordingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordingsViewController.swift; sourceTree = "<group>"; };
+		08F6675F1B54FC5600E66A4F /* RecordingDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordingDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,7 +94,7 @@
 			isa = PBXGroup;
 			children = (
 				086DC6991B41B16000A7BAFF /* SwiftyJSON.h */,
-				086DC69A1B41B16000A7BAFF /* SwiftyJSON.swift */,
+				080D95F61B53E2730056EC69 /* SwiftyJSON.swift */,
 			);
 			name = SwiftyJSON;
 			sourceTree = "<group>";
@@ -95,6 +103,8 @@
 			isa = PBXGroup;
 			children = (
 				086DC65B1B418FCE00A7BAFF /* JumpRecordViewController.swift */,
+				08F6675B1B54476800E66A4F /* RecordingsViewController.swift */,
+				08F6675F1B54FC5600E66A4F /* RecordingDetailViewController.swift */,
 			);
 			name = "View Controller";
 			sourceTree = "<group>";
@@ -120,6 +130,7 @@
 		086DC6531B418FCE00A7BAFF /* Rehapp */ = {
 			isa = PBXGroup;
 			children = (
+				08D52CDA1B5509CD0085D3C9 /* SwiftCharts */,
 				080D95F41B53B39A0056EC69 /* SwiftyJSON */,
 				086DC6841B419C3400A7BAFF /* BLE */,
 				086DC6561B418FCE00A7BAFF /* AppDelegate.swift */,
@@ -142,6 +153,7 @@
 		086DC6541B418FCE00A7BAFF /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				08F667591B54309F00E66A4F /* soles.jpg */,
 				086DC6551B418FCE00A7BAFF /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -260,7 +272,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				08D52CDB1B5509CD0085D3C9 /* SwiftCharts in Resources */,
 				086DC65F1B418FCE00A7BAFF /* Main.storyboard in Resources */,
+				08F6675A1B54309F00E66A4F /* soles.jpg in Resources */,
 				086DC6641B418FCE00A7BAFF /* LaunchScreen.xib in Resources */,
 				086DC6611B418FCE00A7BAFF /* Images.xcassets in Resources */,
 			);
@@ -283,11 +297,13 @@
 				086DC6821B419C2500A7BAFF /* BLEHelper.m in Sources */,
 				086DC6811B419C2500A7BAFF /* BLEDiscovery.m in Sources */,
 				086DC6921B41A05C00A7BAFF /* SensorDataDelegate.swift in Sources */,
-				086DC69B1B41B16000A7BAFF /* SwiftyJSON.swift in Sources */,
+				080D95F71B53E2730056EC69 /* SwiftyJSON.swift in Sources */,
 				086DC6861B419D2800A7BAFF /* ArduinoCommunicationManager.swift in Sources */,
 				086DC65C1B418FCE00A7BAFF /* JumpRecordViewController.swift in Sources */,
 				086DC69D1B41B18800A7BAFF /* FileHandler.swift in Sources */,
 				086DC6831B419C2500A7BAFF /* BLEService.m in Sources */,
+				08F6675C1B54476800E66A4F /* RecordingsViewController.swift in Sources */,
+				08F667601B54FC5600E66A4F /* RecordingDetailViewController.swift in Sources */,
 				086DC6571B418FCE00A7BAFF /* AppDelegate.swift in Sources */,
 				086DC65A1B418FCE00A7BAFF /* Rehapp.xcdatamodeld in Sources */,
 				086DC6981B41A33C00A7BAFF /* SensorDataSession.swift in Sources */,

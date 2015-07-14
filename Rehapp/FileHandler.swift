@@ -13,6 +13,7 @@ class FileHandler {
         //get the documents directory:
         let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true);
         let documentsDirectory = paths[0]
+        print("Documents directory: \(documentsDirectory)")
         return documentsDirectory
     }
     
@@ -57,5 +58,26 @@ class FileHandler {
         } else {
             return ""
         }
+    }
+    
+    class func listFilesAtDocumentDirectory() -> [String] {
+        var error: NSError?
+        var contentList: [String]?
+        let directoryContents =  getDocumentDirectoryPath()
+        do {
+            contentList = try NSFileManager.defaultManager().contentsOfDirectoryAtPath(directoryContents) as [String]
+        } catch let error1 as NSError {
+            error = error1
+        }
+        if let actualError = error {
+            print("Error reading content file list: \(actualError)")
+        }
+        if let content = contentList {
+            return content
+        } else {
+            return ["nicht gefunden"]
+        }
+        
+        
     }
 }
