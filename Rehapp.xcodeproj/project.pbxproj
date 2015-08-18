@@ -21,7 +21,6 @@
 		086DC6861B419D2800A7BAFF /* ArduinoCommunicationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086DC6851B419D2800A7BAFF /* ArduinoCommunicationManager.swift */; };
 		086DC6921B41A05C00A7BAFF /* SensorDataDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086DC6911B41A05C00A7BAFF /* SensorDataDelegate.swift */; };
 		086DC6961B41A18500A7BAFF /* SensorData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086DC6951B41A18500A7BAFF /* SensorData.swift */; };
-		086DC6981B41A33C00A7BAFF /* SensorDataSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086DC6971B41A33C00A7BAFF /* SensorDataSession.swift */; };
 		086DC69D1B41B18800A7BAFF /* FileHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086DC69C1B41B18800A7BAFF /* FileHandler.swift */; };
 		08D52D221B550F240085D3C9 /* ChartAxisLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D52CDE1B550F240085D3C9 /* ChartAxisLabel.swift */; };
 		08D52D231B550F240085D3C9 /* ChartAxisLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D52CDF1B550F240085D3C9 /* ChartAxisLayer.swift */; };
@@ -86,6 +85,8 @@
 		08D52D5E1B550F240085D3C9 /* HandlingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D52D1F1B550F240085D3C9 /* HandlingView.swift */; };
 		08D52D5F1B550F240085D3C9 /* InfoBubble.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D52D201B550F240085D3C9 /* InfoBubble.swift */; };
 		08D52D601B550F240085D3C9 /* StraigthLinePathGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D52D211B550F240085D3C9 /* StraigthLinePathGenerator.swift */; };
+		08D52D621B5510D30085D3C9 /* ExamplesDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D52D611B5510D30085D3C9 /* ExamplesDefaults.swift */; };
+		08D52D641B5510EC0085D3C9 /* Env.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08D52D631B5510EC0085D3C9 /* Env.swift */; };
 		08F6675A1B54309F00E66A4F /* soles.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 08F667591B54309F00E66A4F /* soles.jpg */; };
 		08F6675C1B54476800E66A4F /* RecordingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F6675B1B54476800E66A4F /* RecordingsViewController.swift */; };
 		08F667601B54FC5600E66A4F /* RecordingDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F6675F1B54FC5600E66A4F /* RecordingDetailViewController.swift */; };
@@ -125,7 +126,6 @@
 		086DC6851B419D2800A7BAFF /* ArduinoCommunicationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArduinoCommunicationManager.swift; sourceTree = "<group>"; };
 		086DC6911B41A05C00A7BAFF /* SensorDataDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SensorDataDelegate.swift; sourceTree = "<group>"; };
 		086DC6951B41A18500A7BAFF /* SensorData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SensorData.swift; sourceTree = "<group>"; };
-		086DC6971B41A33C00A7BAFF /* SensorDataSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SensorDataSession.swift; sourceTree = "<group>"; };
 		086DC6991B41B16000A7BAFF /* SwiftyJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwiftyJSON.h; sourceTree = "<group>"; };
 		086DC69C1B41B18800A7BAFF /* FileHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileHandler.swift; sourceTree = "<group>"; };
 		08D52CDE1B550F240085D3C9 /* ChartAxisLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartAxisLabel.swift; sourceTree = "<group>"; };
@@ -191,6 +191,8 @@
 		08D52D1F1B550F240085D3C9 /* HandlingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HandlingView.swift; sourceTree = "<group>"; };
 		08D52D201B550F240085D3C9 /* InfoBubble.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoBubble.swift; sourceTree = "<group>"; };
 		08D52D211B550F240085D3C9 /* StraigthLinePathGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StraigthLinePathGenerator.swift; sourceTree = "<group>"; };
+		08D52D611B5510D30085D3C9 /* ExamplesDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExamplesDefaults.swift; sourceTree = "<group>"; };
+		08D52D631B5510EC0085D3C9 /* Env.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Env.swift; sourceTree = "<group>"; };
 		08F667591B54309F00E66A4F /* soles.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = soles.jpg; sourceTree = "<group>"; };
 		08F6675B1B54476800E66A4F /* RecordingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordingsViewController.swift; sourceTree = "<group>"; };
 		08F6675F1B54FC5600E66A4F /* RecordingDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordingDetailViewController.swift; sourceTree = "<group>"; };
@@ -255,6 +257,8 @@
 			isa = PBXGroup;
 			children = (
 				08D52CDC1B550F0F0085D3C9 /* SwiftCharts */,
+				08D52D631B5510EC0085D3C9 /* Env.swift */,
+				08D52D611B5510D30085D3C9 /* ExamplesDefaults.swift */,
 				080D95F41B53B39A0056EC69 /* SwiftyJSON */,
 				086DC6841B419C3400A7BAFF /* BLE */,
 				086DC6561B418FCE00A7BAFF /* AppDelegate.swift */,
@@ -262,7 +266,6 @@
 				086DC6851B419D2800A7BAFF /* ArduinoCommunicationManager.swift */,
 				086DC6911B41A05C00A7BAFF /* SensorDataDelegate.swift */,
 				086DC6951B41A18500A7BAFF /* SensorData.swift */,
-				086DC6971B41A33C00A7BAFF /* SensorDataSession.swift */,
 				086DC69C1B41B18800A7BAFF /* FileHandler.swift */,
 				086DC6601B418FCE00A7BAFF /* Images.xcassets */,
 				086DC65D1B418FCE00A7BAFF /* Main.storyboard */,
@@ -577,6 +580,7 @@
 				08D52D2E1B550F240085D3C9 /* ChartAxisValueDate.swift in Sources */,
 				086DC69D1B41B18800A7BAFF /* FileHandler.swift in Sources */,
 				08D52D291B550F240085D3C9 /* ChartAxisXLowLayerDefault.swift in Sources */,
+				08D52D641B5510EC0085D3C9 /* Env.swift in Sources */,
 				08D52D461B550F240085D3C9 /* ChartLayerBase.swift in Sources */,
 				08D52D571B550F240085D3C9 /* ChartPointTargetingView.swift in Sources */,
 				08D52D5D1B550F240085D3C9 /* HandlingLabel.swift in Sources */,
@@ -601,8 +605,8 @@
 				08D52D591B550F240085D3C9 /* ChartPointViewBar.swift in Sources */,
 				08D52D581B550F240085D3C9 /* ChartPointTextCircleView.swift in Sources */,
 				08D52D391B550F240085D3C9 /* ChartUtils.swift in Sources */,
+				08D52D621B5510D30085D3C9 /* ExamplesDefaults.swift in Sources */,
 				086DC65A1B418FCE00A7BAFF /* Rehapp.xcdatamodeld in Sources */,
-				086DC6981B41A33C00A7BAFF /* SensorDataSession.swift in Sources */,
 				08D52D261B550F240085D3C9 /* ChartAxisValuesGenerator.swift in Sources */,
 				08D52D4A1B550F240085D3C9 /* ChartPointsLayer.swift in Sources */,
 				08D52D221B550F240085D3C9 /* ChartAxisLabel.swift in Sources */,

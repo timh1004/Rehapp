@@ -20,24 +20,7 @@ class RecordingsViewController: UIViewController, UITableViewDelegate, UITableVi
         super.viewDidLoad()
         
         recordArray = FileHandler.listFilesAtDocumentDirectory()
-        
-        let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true)[0] as String
-        
-        let getImagePath = paths.stringByAppendingPathComponent("4.json")
-        
-        let checkValidation = NSFileManager.defaultManager()
-        
-        if (checkValidation.fileExistsAtPath(getImagePath))
-        {
-            print("FILE AVAILABLE");
-        }
-        else
-        {
-            print("FILE NOT AVAILABLE");
-        }
-        
-        print(FileHandler.listFilesAtDocumentDirectory())
-        
+        // Nur die JSON Files, sortieren nach aufsteigender Nummer
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -48,9 +31,22 @@ class RecordingsViewController: UIViewController, UITableViewDelegate, UITableVi
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as UITableViewCell
     
         cell.textLabel?.text = recordArray[indexPath.row]
+        //Weitere Details einfügen (Name des Probanden etc.)
         
         return cell
         
+    }
+    
+//    func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+//        <#code#>
+//    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "showRecordingDetailViewController" {
+            let destination = segue.destinationViewController as! RecordingDetailViewController
+            let indexPath = tableView.indexPathForSelectedRow
+            destination.fileName = recordArray[indexPath!.row]
+        }
     }
     
     

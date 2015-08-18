@@ -11,10 +11,15 @@ import QuartzCore
 
 class JumpRecordViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate, SensorDataDelegate {
     
-    var isCollectingData = false
-    var sensorDataSession = SensorDataSession()
+    var startDate: NSDate?
+    var endDate: NSDate?
     
+    var isCollectingData = false
     var communicationManager = ArduinoCommunicationManager.sharedInstance
+    
+    private var sensorDataArray: [SensorData] = []
+    
+//    var sensorDataSession = SensorDataSession()
 
     @IBOutlet var nameTextField: UITextField!
     @IBOutlet var weightTextField: UITextField!
@@ -54,12 +59,13 @@ class JumpRecordViewController: UIViewController, UIPickerViewDataSource, UIPick
         
         self.waitForBluetoothToStart { () -> () in
             self.communicationManager.startReceivingSensorData()
+            self.communicationManager.sensorDataDelegate = self
         }
     }
     
     override func viewDidAppear(animated: Bool) {
         self.updateJumpNumberUI()
-        self.communicationManager.sensorDataDelegate = self
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -95,27 +101,52 @@ class JumpRecordViewController: UIViewController, UIPickerViewDataSource, UIPick
 
 
     @IBAction func startStopRecording(sender: UIButton) {
-        self.sensorDataSession.startStopMeasurement{
-            self.isCollectingData = !self.isCollectingData
-            let title:String = self.isCollectingData ? "Stop Recording" : "Start Recording"
-            sender.setTitle(title, forState: .Normal)
-            if (!self.isCollectingData) {
-                self.measurementDidFinish()
-            } else {
-                self.sensorDataSession.resetData()
-            }
+        let title:String = self.isCollectingData ? "Start Recording" : "Stop Recording"
+        sender.setTitle(title, forState: .Normal)
+        if (self.isCollectingData) {
+            //            self.communicationManager.sensorDataDelegate = nil
+            //            self.communicationManager.stopReceivingSensorData()
+            self.isCollectingData = false
+            self.endDate = NSDate()
+            self.measurementDidFinish()
+            //            onSuccess()
+        } else {
+            
+            //                self.communicationManager.sensorDataDelegate = self
+            //                self.communicationManager.startReceivingSensorData()
+            self.isCollectingData = true
+            self.startDate = NSDate()
+            resetData()
+            //                onSuccess()
+            
         }
+        
+        
+//        self.sensorDataSession.startStopMeasurement{
+//            self.isCollectingData = !self.isCollectingData
+//            let title:String = self.isCollectingData ? "Stop Recording" : "Start Recording"
+//            sender.setTitle(title, forState: .Normal)
+//            if (!self.isCollectingData) {
+//                self.measurementDidFinish()
+//            } else {
+//                self.sensorDataSession.resetData()
+//            }
+//        }
     }
     
     func measurementDidFinish() {
-        let sensorData = sensorDataSession.allSensorData()
-        let sensorDataDictionaries = sensorData.map({sensorData in sensorData.toDictionary()})
+//        let sensorData = sensorDataSession.allSensorData()
+        let sensorDataDictionaries = sensorDataArray.map({sensorData in sensorData.toDictionary()})
         let jumpDictionary = ["id":jumpNumber(), "name":self.nameTextField.text as String!, "weightInKg":self.weightTextField.text as String!, "heightInMeter":self.heightTextField.text as String!, "age":self.ageTextField.text as String!, "gender":self.genderTextField.text as String!, "foot":footTextField.text as String!, "additionalInformation":self.additionalInfoTextField.text as String! ,"jumpDistanceInCm":0 as Int!, "jumpDurationInMs":0 as Int!, "sensorData": sensorDataDictionaries]
         let json = JSON(jumpDictionary)
         let jsonString = json.description
         FileHandler.writeToFile("\(self.jumpNumber()).json", content: jsonString)
         
         setJumpNumber(jumpNumber()+1)
+    }
+    
+    func resetData() {
+        self.sensorDataArray = []
     }
     
     //MARK: -Store and save Jump Number to NSUserDefaults
@@ -184,6 +215,10 @@ class JumpRecordViewController: UIViewController, UIPickerViewDataSource, UIPick
         sensor1ForceView.backgroundColor = UIColor(red: 1.0, green: 0.0, blue: 0.0, alpha: alphaForSensor1Force)
         sensor2ForceView.backgroundColor = UIColor(red: 1.0, green: 0.0, blue: 0.0, alpha: alphaForSensor2Force)
         sensor3ForceView.backgroundColor = UIColor(red: 1.0, green: 0.0, blue: 0.0, alpha: alphaForSensor3Force)
+        
+        if isCollectingData {
+            sensorDataArray.append(sensorData)
+        }
 
     }
 
