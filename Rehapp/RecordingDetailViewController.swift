@@ -15,12 +15,17 @@ class RecordingDetailViewController: UIViewController, UITableViewDelegate, UITa
     
     @IBOutlet var tableView: UITableView!
     
+    @IBOutlet weak var sensor1Label: UILabel!
+    @IBOutlet weak var sensor2Label: UILabel!
+    @IBOutlet weak var sensor3Label: UILabel!
+    @IBOutlet weak var creationDateLabel: UILabel!
 //    var recordArray: [String]!
     var json: JSON!
     
     var fileName: String!
     var sensorDataArray = [SensorData]()
     
+    var sensor1Array = [Float]()
     var sensor2Array = [Float]()
     var sensor3Array = [Float]()
     
