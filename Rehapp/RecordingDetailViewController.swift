@@ -28,11 +28,11 @@ class RecordingDetailViewController: UIViewController, UITableViewDelegate, UITa
     var sensor1Array = [Float]()
     var sensor2Array = [Float]()
     var sensor3Array = [Float]()
+    var creationDateArray = [String]()
     
     var sensor1Series: ChartSeries?
     var sensor2Series: ChartSeries?
     var sensor3Series: ChartSeries?
-    var creationDateSeries: ChartSeries?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,6 +77,8 @@ class RecordingDetailViewController: UIViewController, UITableViewDelegate, UITa
                 sensor1Array.append(Float(sensor1Force!))
                 sensor2Array.append(Float(sensor2Force!))
                 sensor3Array.append(Float(sensor3Force!))
+                
+                
             }
             
             sensor1Series = ChartSeries(sensor1Array)
@@ -97,8 +99,16 @@ class RecordingDetailViewController: UIViewController, UITableViewDelegate, UITa
     func didTouchChart(chart: Chart, indexes: Array<Int?>, x: Float, left: CGFloat) {
 //        print("touch")
         for (seriesIndex, dataIndex) in indexes.enumerate() {
-            if let value = chart.valueForSeries(seriesIndex, atIndex: dataIndex) {
+            if let value = chart.valueForSeries(0, atIndex: dataIndex) {
                 print("Touched series: \(seriesIndex): data index: \(dataIndex!); series value: \(value); x-axis value: \(x) (from left: \(left))")
+                
+                let sensorData: SensorData = sensorDataArray[dataIndex!]
+                sensor1Label.text = String(sensorData.sensor1Force)
+                sensor2Label.text = String(sensorData.sensor2Force)
+                sensor3Label.text = String(sensorData.sensor3Force)
+                creationDateLabel.text = String(sensorData.creationDate)
+                
+                
             }
         }
     }
