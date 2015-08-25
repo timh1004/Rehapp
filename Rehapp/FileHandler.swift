@@ -7,8 +7,15 @@
 //
 
 import Foundation
+import UIKit
 
 class FileHandler {
+    
+    private class func getDocumentDirectoryURL() -> NSURL {
+        let documentsURL = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)[0]
+        return documentsURL
+    }
+    
     private class func getDocumentDirectoryPath() -> String {
         //get the documents directory:
         let paths = NSSearchPathForDirectoriesInDomains(.DocumentDirectory, .UserDomainMask, true);
@@ -18,7 +25,9 @@ class FileHandler {
     }
     
     private class func getFilePathForFileName(fileName: String) -> String {
-        return FileHandler.getDocumentDirectoryPath().stringByAppendingPathComponent(fileName)
+        let fileURL = FileHandler.getDocumentDirectoryURL().URLByAppendingPathComponent(fileName)
+        return fileURL.path!
+//        return FileHandler.getDocumentDirectoryPath().stringByAppendingPathComponent(fileName)
     }
     
     class func writeToFile(fileName: String, content: String) {
@@ -39,6 +48,7 @@ class FileHandler {
         if (written) {
             let writtenContent = FileHandler.readFromFile(fileName)
             print(writtenContent)
+            NSNotificationCenter.defaultCenter().postNotificationName("newFileWritten", object: nil)
         }
     }
     
@@ -66,6 +76,7 @@ class FileHandler {
         let directoryContents =  getDocumentDirectoryPath()
         do {
             contentList = try NSFileManager.defaultManager().contentsOfDirectoryAtPath(directoryContents) as [String]
+            
         } catch let error1 as NSError {
             error = error1
         }
@@ -77,7 +88,6 @@ class FileHandler {
         } else {
             return ["nicht gefunden"]
         }
-        
         
     }
 }

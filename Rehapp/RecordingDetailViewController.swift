@@ -26,6 +26,7 @@ class RecordingDetailViewController: UIViewController, UITableViewDelegate, UITa
         self.title = fileName
         
         
+        
         if let dataFromString = FileHandler.readFromFile(fileName).dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false) {
             json = JSON(data: dataFromString)
         }
@@ -74,7 +75,7 @@ class RecordingDetailViewController: UIViewController, UITableViewDelegate, UITa
         let sensor3Force = String(sensorData.sensor3Force)
         let creationDate = String(sensorData.creationDate)
         
-        cell.textLabel?.text = ("Force1: \(sensor1Force), Force1: \(sensor2Force), Force1: \(sensor3Force)")
+        cell.textLabel?.text = ("Force1: \(sensor1Force), Force2: \(sensor2Force), Force3: \(sensor3Force)")
         //recordArray[indexPath.row]
         cell.detailTextLabel?.text = creationDate
         

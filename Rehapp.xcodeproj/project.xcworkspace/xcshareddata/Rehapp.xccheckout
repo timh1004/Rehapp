@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>793FD8BE-1D0C-464D-88BB-141D17CA1EE2</string>
 	<key>IDESourceControlProjectName</key>
-	<string>Rehapp</string>
+	<string>project</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>F422B0ECA75315A10BF5D0F9298741F95112380B</key>
 		<string>https://github.com/timh1004/Rehapp.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>Rehapp.xcodeproj</string>
+	<string>Rehapp.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>F422B0ECA75315A10BF5D0F9298741F95112380B</key>
