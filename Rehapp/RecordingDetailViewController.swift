@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class RecordingDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class RecordingDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ChartDelegate {
     
     @IBOutlet weak var chart: Chart!
     
@@ -21,15 +21,29 @@ class RecordingDetailViewController: UIViewController, UITableViewDelegate, UITa
     var fileName: String!
     var sensorDataArray = [SensorData]()
     
+    var sensor2Array = [Float]()
+    var sensor3Array = [Float]()
+    
+    var sensor1Series: ChartSeries?
+    var sensor2Series: ChartSeries?
+    var sensor3Series: ChartSeries?
+    var creationDateSeries: ChartSeries?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        chart.delegate = self
+        
+        chart.minY = 0
+        chart.maxY = 1023
+        chart.labelColor = UIColor.clearColor()
+        chart.gridColor = UIColor.clearColor()
+        chart.bottomInset = 0
+        chart.topInset = 0
+        chart.lineWidth = 1
+        
+        
         self.title = fileName
-        
-        let series = ChartSeries([0, 6, 2, 8, 4, 7, 3, 10, 8])
-        series.color = ChartColors.greenColor()
-        chart.addSeries(series)
-        
         
         if let dataFromString = FileHandler.readFromFile(fileName).dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false) {
             json = JSON(data: dataFromString)
@@ -55,11 +69,36 @@ class RecordingDetailViewController: UIViewController, UITableViewDelegate, UITa
                 
                 let sensorData = SensorData(sensor1Force: sensor1Force!, sensor2Force: sensor2Force!, sensor3Force: sensor3Force!, creationDate: creationDate!)
                 sensorDataArray.append(sensorData)
+                sensor1Array.append(Float(sensor1Force!))
+                sensor2Array.append(Float(sensor2Force!))
+                sensor3Array.append(Float(sensor3Force!))
             }
+            
+            sensor1Series = ChartSeries(sensor1Array)
+            sensor2Series = ChartSeries(sensor2Array)
+            sensor3Series = ChartSeries(sensor3Array)
+            sensor1Series!.color = ChartColors.greenColor()
+            sensor2Series!.color = ChartColors.blueColor()
+            sensor3Series!.color = ChartColors.redColor()
+            let series = [sensor1Series!, sensor2Series!, sensor3Series!]
+            chart.addSeries(series)
             
         }
         
         
+        
+    }
+    
+    func didTouchChart(chart: Chart, indexes: Array<Int?>, x: Float, left: CGFloat) {
+//        print("touch")
+        for (seriesIndex, dataIndex) in indexes.enumerate() {
+            if let value = chart.valueForSeries(seriesIndex, atIndex: dataIndex) {
+                print("Touched series: \(seriesIndex): data index: \(dataIndex!); series value: \(value); x-axis value: \(x) (from left: \(left))")
+            }
+        }
+    }
+    
+    func didFinishTouchingChart(chart: Chart) {
         
     }
     
@@ -79,11 +118,35 @@ class RecordingDetailViewController: UIViewController, UITableViewDelegate, UITa
         let sensor3Force = String(sensorData.sensor3Force)
         let creationDate = String(sensorData.creationDate)
         
-        cell.textLabel?.text = ("Force1: \(sensor1Force), Force2: \(sensor2Force), Force3: \(sensor3Force)")
+//        let sensor1ForceAttributedString = NSMutableAttributedString(string: sensor1Force)
+        
+        let string = "Sensor1: \(sensor1Force), Sensor2: \(sensor2Force), Sensor3: \(sensor3Force)"
+        let attributedString = NSMutableAttributedString(string: string as String)
+//        var range = (string as NSString).rangeOfString("\(departure.destination)")
+        
+        let sensor1Attributes = [NSForegroundColorAttributeName: ChartColors.greenColor()]
+        let sensor2Attributes = [NSForegroundColorAttributeName: ChartColors.blueColor()]
+        let sensor3Attributes = [NSForegroundColorAttributeName: ChartColors.redColor()]
+        
+        attributedString.addAttributes(sensor1Attributes, range: (string as NSString).rangeOfString("\(sensor1Force)"))
+        attributedString.addAttributes(sensor2Attributes, range: (string as NSString).rangeOfString("\(sensor2Force)"))
+        attributedString.addAttributes(sensor3Attributes, range: (string as NSString).rangeOfString("\(sensor3Force)"))
+        
+        cell.textLabel?.attributedText = attributedString
+//        cell.textLabel?.text = ("Force1: \(sensor1Force), Force2: \(sensor2Force), Force3: \(sensor3Force)")
         //recordArray[indexPath.row]
         cell.detailTextLabel?.text = creationDate
         
         return cell
+        
+    }
+    
+    override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
+        
+        super.viewWillTransitionToSize(size, withTransitionCoordinator: coordinator)
+        
+        // Redraw chart on rotation
+        chart.setNeedsDisplay()
         
     }
     

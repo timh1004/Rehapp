@@ -71,6 +71,8 @@ class RecordingsViewController: UIViewController, UITableViewDelegate, UITableVi
             let destination = segue.destinationViewController as! RecordingDetailViewController
             let indexPath = tableView.indexPathForSelectedRow
             destination.fileName = recordArray[indexPath!.row]
+            
+            destination.hidesBottomBarWhenPushed = true
         }
     }
     
