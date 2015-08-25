@@ -11,6 +11,7 @@ import UIKit
 
 class RecordingDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    @IBOutlet weak var chart: Chart!
     
     @IBOutlet var tableView: UITableView!
     
@@ -25,6 +26,9 @@ class RecordingDetailViewController: UIViewController, UITableViewDelegate, UITa
         
         self.title = fileName
         
+        let series = ChartSeries([0, 6, 2, 8, 4, 7, 3, 10, 8])
+        series.color = ChartColors.greenColor()
+        chart.addSeries(series)
         
         
         if let dataFromString = FileHandler.readFromFile(fileName).dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false) {
