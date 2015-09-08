@@ -90,4 +90,12 @@ class FileHandler {
         }
         
     }
+    
+    class func deleteFileWithFileName(fileName: String) {
+        do {
+            try NSFileManager.defaultManager().removeItemAtPath(FileHandler.getFilePathForFileName(fileName))
+        } catch {
+            print("Konnte nicht löschen")
+        }
+    }
 }

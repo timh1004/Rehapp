@@ -200,7 +200,7 @@ class JumpRecordViewController: UIViewController, UITextFieldDelegate, SensorDat
     func measurementDidFinish() {
 //        let sensorData = sensorDataSession.allSensorData()
         let sensorDataDictionaries = sensorDataArray.map({sensorData in sensorData.toDictionary()})
-        let jumpDictionary = ["id":jumpNumber(), "isSideHops":self.exerciseSegmentedControl.selectedSegmentIndex as Int!, "name":self.nameTextField.text as String!, "weightInKg":self.weightTextField.text as String!, "heightInMeter":self.heightTextField.text as String!, "age":self.ageTextField.text as String!, "gender":self.genderSegmentedControl.selectedSegmentIndex as Int!, "foot":footSegmentedControl.selectedSegmentIndex as Int!, "additionalInformation":self.additionalInfoTextField.text as String! ,"jumpDistanceInCm":jumpDistanceInCm as Int!, "jumpDurationInMs":0 as Int!, "jumpCount":jumpCount as Int!, "sensorData": sensorDataDictionaries]
+        let jumpDictionary = ["id":jumpNumber(), "isSideHops":self.exerciseSegmentedControl.selectedSegmentIndex as Int!, "name":self.nameTextField.text as String!, "weightInKg":self.weightTextField.text as String!, "heightInCm":self.heightTextField.text as String!, "age":self.ageTextField.text as String!, "gender":self.genderSegmentedControl.selectedSegmentIndex as Int!, "foot":footSegmentedControl.selectedSegmentIndex as Int!, "additionalInformation":self.additionalInfoTextField.text as String! ,"jumpDistanceInCm":jumpDistanceInCm as Int!, "jumpDurationInMs":0 as Int!, "jumpCount":jumpCount as Int!, "sensorData": sensorDataDictionaries]
         let json = JSON(jumpDictionary)
         let jsonString = json.description
         FileHandler.writeToFile("\(self.jumpNumber()).json", content: jsonString)

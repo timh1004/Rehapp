@@ -25,7 +25,8 @@ class RecordingsViewController: UIViewController, UITableViewDelegate, UITableVi
     
     @IBOutlet var tableView: UITableView!
     
-    var recordArray: [String]!
+    var sortedRecordArray: [Record]!
+    var json: JSON!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,9 +36,22 @@ class RecordingsViewController: UIViewController, UITableViewDelegate, UITableVi
         // Nur die JSON Files, sortieren nach aufsteigender Nummer
     }
     
-    func getRecordArray() -> [String] {
+    func getRecordArray() -> [Record] {
+        
+        
+        var recordArray: [Record] = []
         let filteredArray = FileHandler.listFilesAtDocumentDirectory().filter{$0.hasSuffix(".json")}
-        let sortedArray = filteredArray.sort(){$0 < $1}
+        for item in filteredArray {
+            if let dataFromString = FileHandler.readFromFile(item).dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false) {
+                json = JSON(data: dataFromString)
+                let dictionary = json.dictionaryObject
+                let record = Record(fromDictionary: dictionary!)
+                recordArray.append(record)
+            }
+        }
+        
+        
+        let sortedArray = recordArray.sort(){$0 < $1}
 //        var filteredArrayWihtoutSuffix: [String]!
 //        for item in filteredArray {
 //            let startIndex = item.endIndex.advancedBy(-4)
@@ -56,17 +70,40 @@ class RecordingsViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as UITableViewCell
-        recordArray = getRecordArray()
-        cell.textLabel?.text = recordArray[indexPath.row]
+        sortedRecordArray = getRecordArray()
+        var foot = String()
+        var exercise = String()
+        if sortedRecordArray[indexPath.row].foot {foot = "Left"} else {foot = "Right"}
+        if sortedRecordArray[indexPath.row].isSideHops {exercise = "Side Hops"} else {exercise = "One-Leg Hop"}
+        
+        
+        cell.textLabel?.text = "ID: \(sortedRecordArray[indexPath.row].id) - \(exercise) - \(foot) Foot"
+        cell.detailTextLabel?.text = "test"
         //Weitere Details einfügen (Name des Probanden etc.)
         
         
         return cell
-        
+    }
+    
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return false
+    }
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        if editingStyle == UITableViewCellEditingStyle.Delete {
+            tableView.beginUpdates()
+            tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Automatic)
+            sortedRecordArray.removeAtIndex(indexPath.row)
+            
+            print("delete: \(sortedRecordArray[indexPath.row].id), index: \(indexPath.row)")
+            FileHandler.deleteFileWithFileName("\(sortedRecordArray[indexPath.row].id).json")
+            
+            tableView.endUpdates()
+        }
     }
     
 //    func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
-//        <#code#>
+//
 //    }
 
     func updateTableViewOnNotification(notification: NSNotification) {
@@ -77,7 +114,7 @@ class RecordingsViewController: UIViewController, UITableViewDelegate, UITableVi
         if segue.identifier == "showRecordingDetailViewController" {
             let destination = segue.destinationViewController as! RecordingDetailViewController
             let indexPath = tableView.indexPathForSelectedRow
-            destination.fileName = recordArray[indexPath!.row]
+            destination.fileName = "\(sortedRecordArray[indexPath!.row].id).json"
             
             destination.hidesBottomBarWhenPushed = true
         }

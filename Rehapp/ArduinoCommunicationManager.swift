@@ -12,14 +12,14 @@ private let _SharedInstance = ArduinoCommunicationManager()
 
 class ArduinoCommunicationManager: NSObject, BLEDiscoveryDelegate, BLEServiceDelegate, BLEServiceDataDelegate {
     
-
+    
     let numberOfRequiredSensors: Int = 1
     var shouldAutomaticallyReconnect = false
     
     class var sharedInstance: ArduinoCommunicationManager {
         return _SharedInstance
     }
-
+    
     var sensorDataDelegate: SensorDataDelegate? = nil
     
     override init() {
@@ -30,7 +30,7 @@ class ArduinoCommunicationManager: NSObject, BLEDiscoveryDelegate, BLEServiceDel
         
         sharedInstance.startScanningForSupportedUUIDs()
     }
-
+    
     func isAbleToReceiveSensorData() -> Bool {
         let foundPeripherals = BLEDiscovery.sharedInstance().foundPeripherals.count
         NSLog("Found %d Peripherals", foundPeripherals)
@@ -112,19 +112,19 @@ class ArduinoCommunicationManager: NSObject, BLEDiscoveryDelegate, BLEServiceDel
     //MARK: BLEServiceData Delegate
     
     func didReceiveData(data: UnsafeMutablePointer<UInt8>, length: Int) {
-//        print("Length :\(length)")
+        //        print("Length :\(length)")
         
         
         if (length == 8) {
             
             for var i = 0; i < length; i+=8 {
                 
-//                print("Data0: \(data[0])")
-//                print("Data1: \(data[1])")
-//                print("Data2: \(data[2])")
-//                print("Data3: \(data[3])")
-//                print("Data4: \(data[4])")
-//                print("Data5: \(data[5])")
+                //                print("Data0: \(data[0])")
+                //                print("Data1: \(data[1])")
+                //                print("Data2: \(data[2])")
+                //                print("Data3: \(data[3])")
+                //                print("Data4: \(data[4])")
+                //                print("Data5: \(data[5])")
                 
                 
                 let sensor1Force = transformReceivedUIntsToInt([data[0], data[1]])
@@ -134,21 +134,25 @@ class ArduinoCommunicationManager: NSObject, BLEDiscoveryDelegate, BLEServiceDel
                 let sensorTimestampInMilliseconds =  transformReceivedUIntsToInt([data[6], data[7]])
                 
                 
-//                print(sensorTimestampInMilliseconds)
-//                print(transformReceivedBytesIntoInt)
+                //                print(sensorTimestampInMilliseconds)
+                //                print(transformReceivedBytesIntoInt)
                 
                 
-//                print("sensor1Force: \(sensor1Force)")
-//                print("sensor2Force: \(sensor2Force)")
-//                print("sensor3Force: \(sensor3Force)")
-//                print("time: \(sensorTimestampInMilliseconds)")
+                //                print("sensor1Force: \(sensor1Force)")
+                //                print("sensor2Force: \(sensor2Force)")
+                //                print("sensor3Force: \(sensor3Force)")
+                //                print("time: \(sensorTimestampInMilliseconds)")
                 
                 
-                let sensorData = SensorData(sensor1Force: sensor1Force, sensor2Force: sensor2Force, sensor3Force: sensor3Force, sensorTimeStamp: sensorTimestampInMilliseconds)
-                
-                if let delegate = self.sensorDataDelegate {
-                    delegate.didReceiveData(sensorData)
+                //To discard wrong measurements and only accept values that are possible
+                if (sensor1Force < 1024 && sensor2Force < 1024 && sensor3Force < 1024) {
+                    let sensorData = SensorData(sensor1Force: sensor1Force, sensor2Force: sensor2Force, sensor3Force: sensor3Force, sensorTimeStamp: sensorTimestampInMilliseconds)
+                    if let delegate = self.sensorDataDelegate {
+                        delegate.didReceiveData(sensorData)
+                    }
                 }
+                
+                
             }
         }
     }
@@ -158,8 +162,8 @@ class ArduinoCommunicationManager: NSObject, BLEDiscoveryDelegate, BLEServiceDel
         
         let data = NSData(bytes: inputData, length: inputData.count)
         
-//        var u16 = UnsafePointer<UInt16>(data).memory
-//        println("u16: \(u16)")
+        //        var u16 = UnsafePointer<UInt16>(data).memory
+        //        println("u16: \(u16)")
         var u16: UInt16 = 0
         data.getBytes(&u16)
         
@@ -169,5 +173,5 @@ class ArduinoCommunicationManager: NSObject, BLEDiscoveryDelegate, BLEServiceDel
     func transformReceivedBytesIntoInt(inputData: [UInt8]) -> Int {
         return transformReceivedUIntsToInt(inputData) - 32767
     }
-
+    
 }

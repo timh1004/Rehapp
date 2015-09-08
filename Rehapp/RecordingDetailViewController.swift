@@ -42,6 +42,9 @@ class RecordingDetailViewController: UIViewController, UITableViewDelegate, UITa
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //To disable the swipe to go back gesture
+        self.navigationController?.interactivePopGestureRecognizer?.enabled = false
+        
         chart.delegate = self
         
         chart.minY = 0
@@ -62,6 +65,7 @@ class RecordingDetailViewController: UIViewController, UITableViewDelegate, UITa
         if let dataFromString = FileHandler.readFromFile(fileName).dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false) {
             json = JSON(data: dataFromString)
         }
+        
         
         print(json["id"].stringValue)
         

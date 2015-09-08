@@ -11,6 +11,7 @@
 		002AE9131B8B9C4D00E552DE /* ChartColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002AE9101B8B9C4D00E552DE /* ChartColors.swift */; };
 		002AE9141B8B9C4D00E552DE /* ChartSeries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002AE9111B8B9C4D00E552DE /* ChartSeries.swift */; };
 		080D95F71B53E2730056EC69 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080D95F61B53E2730056EC69 /* SwiftyJSON.swift */; };
+		08335C351B9F250B00F29C5B /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08335C341B9F250B00F29C5B /* Record.swift */; settings = {ASSET_TAGS = (); }; };
 		086DC6571B418FCE00A7BAFF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086DC6561B418FCE00A7BAFF /* AppDelegate.swift */; };
 		086DC65A1B418FCE00A7BAFF /* Rehapp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 086DC6581B418FCE00A7BAFF /* Rehapp.xcdatamodeld */; };
 		086DC65C1B418FCE00A7BAFF /* JumpRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086DC65B1B418FCE00A7BAFF /* JumpRecordViewController.swift */; };
@@ -45,6 +46,7 @@
 		002AE9101B8B9C4D00E552DE /* ChartColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartColors.swift; sourceTree = "<group>"; };
 		002AE9111B8B9C4D00E552DE /* ChartSeries.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartSeries.swift; sourceTree = "<group>"; };
 		080D95F61B53E2730056EC69 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
+		08335C341B9F250B00F29C5B /* Record.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
 		086DC6511B418FCE00A7BAFF /* Rehapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rehapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		086DC6551B418FCE00A7BAFF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		086DC6561B418FCE00A7BAFF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 				080D95F51B53B5FA0056EC69 /* View Controller */,
 				086DC6851B419D2800A7BAFF /* ArduinoCommunicationManager.swift */,
 				086DC6911B41A05C00A7BAFF /* SensorDataDelegate.swift */,
+				08335C341B9F250B00F29C5B /* Record.swift */,
 				086DC6951B41A18500A7BAFF /* SensorData.swift */,
 				086DC69C1B41B18800A7BAFF /* FileHandler.swift */,
 				086DC6601B418FCE00A7BAFF /* Images.xcassets */,
@@ -319,6 +322,7 @@
 				086DC6571B418FCE00A7BAFF /* AppDelegate.swift in Sources */,
 				086DC65A1B418FCE00A7BAFF /* Rehapp.xcdatamodeld in Sources */,
 				086DC6961B41A18500A7BAFF /* SensorData.swift in Sources */,
+				08335C351B9F250B00F29C5B /* Record.swift in Sources */,
 				002AE9131B8B9C4D00E552DE /* ChartColors.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
