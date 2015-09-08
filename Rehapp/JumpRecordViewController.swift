@@ -9,7 +9,7 @@
 import UIKit
 import QuartzCore
 
-class JumpRecordViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate, SensorDataDelegate {
+class JumpRecordViewController: UIViewController, UITextFieldDelegate, SensorDataDelegate {
     
     var startDate: NSDate?
     var endDate: NSDate?
@@ -21,12 +21,13 @@ class JumpRecordViewController: UIViewController, UIPickerViewDataSource, UIPick
     
 //    var sensorDataSession = SensorDataSession()
 
+    @IBOutlet var exerciseSegmentedControl: UISegmentedControl!
     @IBOutlet var nameTextField: UITextField!
     @IBOutlet var weightTextField: UITextField!
     @IBOutlet var heightTextField: UITextField!
     @IBOutlet var ageTextField: UITextField!
-    @IBOutlet var genderTextField: UITextField!
-    @IBOutlet var footTextField: UITextField!
+    @IBOutlet var genderSegmentedControl: UISegmentedControl!
+    @IBOutlet var footSegmentedControl: UISegmentedControl!
     @IBOutlet var additionalInfoTextField: UITextField!
     @IBOutlet var jumpNumberLabel: UILabel!
     @IBOutlet var jumpNumberStepper: UIStepper!
@@ -38,17 +39,12 @@ class JumpRecordViewController: UIViewController, UIPickerViewDataSource, UIPick
     @IBOutlet var sensor3ForceView: UIView!
     @IBOutlet var startStopRecordingButton: UIButton!
     
-    let genderOptions = ["Female", "Male"]
-    let footOptions = ["Left foot", "Right foot"]
+    let nextField = [1:2, 2:3, 3:4, 4:5]
+    var jumpDistanceInCm = 0
+    var jumpCount = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        
-        let pickerView = UIPickerView()
-        pickerView.delegate = self
-        genderTextField.inputView = pickerView
-        footTextField.inputView = pickerView
         
         sensor1ForceView.layer.cornerRadius = 25
         sensor2ForceView.layer.cornerRadius = 25
@@ -57,9 +53,17 @@ class JumpRecordViewController: UIViewController, UIPickerViewDataSource, UIPick
         sensor2ForceView.layer.masksToBounds = true
         sensor3ForceView.layer.masksToBounds = true
         
+        startStopRecordingButton.enabled = false
+        
         self.waitForBluetoothToStart { () -> () in
             self.communicationManager.startReceivingSensorData()
             self.communicationManager.sensorDataDelegate = self
+        }
+        
+        for i in 1...5 {
+            if let textField = self.view.viewWithTag(i) as? UITextField {
+                textField.delegate = self
+            }
         }
     }
     
@@ -77,6 +81,7 @@ class JumpRecordViewController: UIViewController, UIPickerViewDataSource, UIPick
         if (self.communicationManager.isAbleToReceiveSensorData()) {
             NSLog("After called")
             after()
+            startStopRecordingButton.enabled = true
         } else {
             delay(0.5) {
                 self.waitForBluetoothToStart(after)
@@ -93,7 +98,6 @@ class JumpRecordViewController: UIViewController, UIPickerViewDataSource, UIPick
             dispatch_get_main_queue(), closure)
     }
     
-    
     //MARK: -IBActions
     @IBAction func jumpNumberChanged(sender: UIStepper) {
         self.setJumpNumber(Int(sender.value))
@@ -108,7 +112,16 @@ class JumpRecordViewController: UIViewController, UIPickerViewDataSource, UIPick
             //            self.communicationManager.stopReceivingSensorData()
             self.isCollectingData = false
             self.endDate = NSDate()
-            self.measurementDidFinish()
+            
+            //display distance alert view only when One-Leg Hop is selected
+            if exerciseSegmentedControl.selectedSegmentIndex == 0 {
+                self.jumpCount = 0
+                self.displayDistanceAlertView()
+            } else {
+                self.jumpDistanceInCm = 0
+                self.displayCountAlertView()
+            }
+            
             //            onSuccess()
         } else {
             
@@ -134,10 +147,60 @@ class JumpRecordViewController: UIViewController, UIPickerViewDataSource, UIPick
 //        }
     }
     
+    func displayDistanceAlertView() {
+        let alertController = UIAlertController(title: "Distance", message: "Please enter the jumped distance", preferredStyle: UIAlertControllerStyle.Alert)
+        
+        let enterDistanceAction = UIAlertAction(title: "Done", style: .Default) { (_) in
+            let distanceTextField = alertController.textFields![0] as UITextField
+            self.jumpDistanceInCm = Int(distanceTextField.text!)!
+            self.measurementDidFinish()
+        }
+        enterDistanceAction.enabled = false
+        
+//        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (_) in }
+        
+        alertController.addTextFieldWithConfigurationHandler { (textField) in
+            textField.placeholder = "Distance in cm"
+            textField.keyboardType = UIKeyboardType.NumberPad
+            
+            NSNotificationCenter.defaultCenter().addObserverForName(UITextFieldTextDidChangeNotification, object: textField, queue: NSOperationQueue.mainQueue()) { (notification) in
+                enterDistanceAction.enabled = textField.text != ""
+            }
+        }
+        
+        alertController.addAction(enterDistanceAction)
+        self.presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    func displayCountAlertView() {
+        let alertController = UIAlertController(title: "Count", message: "Please enter the number of jumps", preferredStyle: UIAlertControllerStyle.Alert)
+        
+        let enterCountAction = UIAlertAction(title: "Done", style: .Default) { (_) in
+            let countTextField = alertController.textFields![0] as UITextField
+            self.jumpCount = Int(countTextField.text!)!
+            self.measurementDidFinish()
+        }
+        enterCountAction.enabled = false
+        
+        //        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel) { (_) in }
+        
+        alertController.addTextFieldWithConfigurationHandler { (textField) in
+            textField.placeholder = "Count"
+            textField.keyboardType = UIKeyboardType.NumberPad
+            
+            NSNotificationCenter.defaultCenter().addObserverForName(UITextFieldTextDidChangeNotification, object: textField, queue: NSOperationQueue.mainQueue()) { (notification) in
+                enterCountAction.enabled = textField.text != ""
+            }
+        }
+        
+        alertController.addAction(enterCountAction)
+        self.presentViewController(alertController, animated: true, completion: nil)
+    }
+    
     func measurementDidFinish() {
 //        let sensorData = sensorDataSession.allSensorData()
         let sensorDataDictionaries = sensorDataArray.map({sensorData in sensorData.toDictionary()})
-        let jumpDictionary = ["id":jumpNumber(), "name":self.nameTextField.text as String!, "weightInKg":self.weightTextField.text as String!, "heightInMeter":self.heightTextField.text as String!, "age":self.ageTextField.text as String!, "gender":self.genderTextField.text as String!, "foot":footTextField.text as String!, "additionalInformation":self.additionalInfoTextField.text as String! ,"jumpDistanceInCm":0 as Int!, "jumpDurationInMs":0 as Int!, "sensorData": sensorDataDictionaries]
+        let jumpDictionary = ["id":jumpNumber(), "isSideHops":self.exerciseSegmentedControl.selectedSegmentIndex as Int!, "name":self.nameTextField.text as String!, "weightInKg":self.weightTextField.text as String!, "heightInMeter":self.heightTextField.text as String!, "age":self.ageTextField.text as String!, "gender":self.genderSegmentedControl.selectedSegmentIndex as Int!, "foot":footSegmentedControl.selectedSegmentIndex as Int!, "additionalInformation":self.additionalInfoTextField.text as String! ,"jumpDistanceInCm":jumpDistanceInCm as Int!, "jumpDurationInMs":0 as Int!, "jumpCount":jumpCount as Int!, "sensorData": sensorDataDictionaries]
         let json = JSON(jumpDictionary)
         let jsonString = json.description
         FileHandler.writeToFile("\(self.jumpNumber()).json", content: jsonString)
@@ -165,40 +228,17 @@ class JumpRecordViewController: UIViewController, UIPickerViewDataSource, UIPick
         self.jumpNumberStepper.value = Double(currentJumpNumber)
     }
     
-    //MARK: -PickerViewDelegate
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        if genderTextField.editing {
-            return genderOptions.count
-        } else {
-            return footOptions.count
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        // Consult our dictionary to find the next field
+        if let nextTag = nextField[textField.tag] {
+            if let nextResponder = textField.superview?.viewWithTag(nextTag) {
+                // Have the next field become the first responder
+                nextResponder.becomeFirstResponder()
+            }
         }
+        // Return false here to avoid Next/Return key doing anything
+        return false
     }
-    
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        if genderTextField.editing {
-            return genderOptions[row]
-        } else {
-            return footOptions[row]
-        }
-    }
-    
-    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        if genderTextField.editing {
-            genderTextField.text = genderOptions[row]
-        } else {
-            footTextField.text = footOptions[row]
-        }
-    }
-
-//TODO: Zum nächsten Textfeld gehen
-//    func textFieldShouldReturn(textField: UITextField) -> Bool {
-//        textField.resignFirstResponder()
-//        return true
-//    }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         self.view.endEditing(true)

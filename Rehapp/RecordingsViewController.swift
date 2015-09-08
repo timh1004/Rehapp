@@ -9,15 +9,16 @@
 import Foundation
 import UIKit
 
-extension String {
-    func chopPrefix(count: Int = 1) -> String {
-        return self.substringFromIndex(advance(self.startIndex, count))
-    }
-    
-    func chopSuffix(count: Int = 1) -> String {
-        return self.substringToIndex(advance(self.endIndex, -count))
-    }
-}
+// doesn't work
+//extension String {
+//    func chopPrefix(count: Int = 1) -> String {
+//        return self.substringFromIndex(advance(self.startIndex, count))
+//    }
+//    
+//    func chopSuffix(count: Int = 1) -> String {
+//        return self.substringToIndex(advance(self.endIndex, -count))
+//    }
+//}
 
 class RecordingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -36,10 +37,15 @@ class RecordingsViewController: UIViewController, UITableViewDelegate, UITableVi
     
     func getRecordArray() -> [String] {
         let filteredArray = FileHandler.listFilesAtDocumentDirectory().filter{$0.hasSuffix(".json")}
-        for item in filteredArray {
-            item.chopSuffix()
-        }
-        return filteredArray
+        let sortedArray = filteredArray.sort(){$0 < $1}
+//        var filteredArrayWihtoutSuffix: [String]!
+//        for item in filteredArray {
+//            let startIndex = item.endIndex.advancedBy(-4)
+//            let substring = item.substringFromIndex(startIndex)
+//            filteredArrayWihtoutSuffix.append(substring)
+//
+//        }
+        return sortedArray
         
     }
     
@@ -53,6 +59,7 @@ class RecordingsViewController: UIViewController, UITableViewDelegate, UITableVi
         recordArray = getRecordArray()
         cell.textLabel?.text = recordArray[indexPath.row]
         //Weitere Details einfügen (Name des Probanden etc.)
+        
         
         return cell
         

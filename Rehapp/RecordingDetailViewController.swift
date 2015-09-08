@@ -19,16 +19,21 @@ class RecordingDetailViewController: UIViewController, UITableViewDelegate, UITa
     @IBOutlet weak var sensor2Label: UILabel!
     @IBOutlet weak var sensor3Label: UILabel!
     @IBOutlet weak var creationDateLabel: UILabel!
+    @IBOutlet var timeIntervalLabel: UILabel!
 //    var recordArray: [String]!
     var json: JSON!
     
     var fileName: String!
     var sensorDataArray = [SensorData]()
     
+    var isLeftFoot = Bool()
+    
     var sensor1Array = [Float]()
     var sensor2Array = [Float]()
     var sensor3Array = [Float]()
     var creationDateArray = [String]()
+    
+    var startInterval: NSTimeInterval!
     
     var sensor1Series: ChartSeries?
     var sensor2Series: ChartSeries?
@@ -43,36 +48,43 @@ class RecordingDetailViewController: UIViewController, UITableViewDelegate, UITa
         chart.maxY = 1023
         chart.labelColor = UIColor.clearColor()
         chart.gridColor = UIColor.clearColor()
-        chart.bottomInset = 0
+        chart.bottomInset = 10
         chart.topInset = 0
         chart.lineWidth = 1
         
+        sensor1Label.textColor = ChartColors.greenColor()
+        sensor2Label.textColor = ChartColors.blueColor()
+        sensor3Label.textColor = ChartColors.redColor()
         
         self.title = fileName
+        self.navigationItem.setRightBarButtonItem(UIBarButtonItem(barButtonSystemItem: .Search, target: self, action: "barButtonItemClicked:"), animated: true)
         
         if let dataFromString = FileHandler.readFromFile(fileName).dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false) {
             json = JSON(data: dataFromString)
         }
         
         print(json["id"].stringValue)
-//        print(json["sensorData"].array)
+        
+        isLeftFoot = json["foot"].boolValue
+//        print("isLeftFoot \(isLeftFoot)")
         
         if let recordArray = json["sensorData"].array {
-
+            
+            let firstEntry = recordArray[0]
+            startInterval = (firstEntry["sensorTimeStamp"].double!)
+            print("start Interval: \(startInterval)")
             
             for sensorDataDict in recordArray {
+                
 //                var creationDate: NSDate? = sensorDataDict["creationDate"].NSd
 //                let sensorTimeStamp: Int? = sensorDataDict["sensorTimeStamp"].int
                 let sensor1Force: Int? = sensorDataDict["sensor1Force"].int
                 let sensor2Force: Int? = sensorDataDict["sensor2Force"].int
                 let sensor3Force: Int? = sensorDataDict["sensor3Force"].int
+                let sensorTimeStamp: Int? = sensorDataDict["sensorTimeStamp"].int
                 let creationDate: NSDate? = NSDate(timeIntervalSince1970: NSTimeInterval(sensorDataDict["creationDate"].double!))
                 
-                print("Als Double: " + String((sensorDataDict["creationDate"].double!)))
-                print("Als TimeInterval: " + String(NSTimeInterval(sensorDataDict["creationDate"].double!)))
-                print("Als NSDate: " + String(NSDate(timeIntervalSince1970: NSTimeInterval(sensorDataDict["creationDate"].double!))))
-                
-                let sensorData = SensorData(sensor1Force: sensor1Force!, sensor2Force: sensor2Force!, sensor3Force: sensor3Force!, creationDate: creationDate!)
+                let sensorData = SensorData(sensor1Force: sensor1Force!, sensor2Force: sensor2Force!, sensor3Force: sensor3Force!, creationDate: creationDate!, sensorTimeStamp: sensorTimeStamp!)
                 sensorDataArray.append(sensorData)
                 sensor1Array.append(Float(sensor1Force!))
                 sensor2Array.append(Float(sensor2Force!))
@@ -87,26 +99,43 @@ class RecordingDetailViewController: UIViewController, UITableViewDelegate, UITa
             sensor1Series!.color = ChartColors.greenColor()
             sensor2Series!.color = ChartColors.blueColor()
             sensor3Series!.color = ChartColors.redColor()
-            let series = [sensor1Series!, sensor2Series!, sensor3Series!]
+            var series = [ChartSeries]()
+            if isLeftFoot {
+                series = [sensor1Series!, sensor3Series!]
+            } else {
+                series = [sensor1Series!, sensor2Series!]
+            }
+            
             chart.addSeries(series)
             
         }
-        
         
         
     }
     
     func didTouchChart(chart: Chart, indexes: Array<Int?>, x: Float, left: CGFloat) {
 //        print("touch")
-        for (seriesIndex, dataIndex) in indexes.enumerate() {
-            if let value = chart.valueForSeries(0, atIndex: dataIndex) {
-                print("Touched series: \(seriesIndex): data index: \(dataIndex!); series value: \(value); x-axis value: \(x) (from left: \(left))")
+        for (_, dataIndex) in indexes.enumerate() {
+            if let _ = chart.valueForSeries(0, atIndex: dataIndex) {
+//                print("Touched series: \(seriesIndex): data index: \(dataIndex!); series value: \(value); x-axis value: \(x) (from left: \(left))")
                 
                 let sensorData: SensorData = sensorDataArray[dataIndex!]
                 sensor1Label.text = String(sensorData.sensor1Force)
                 sensor2Label.text = String(sensorData.sensor2Force)
                 sensor3Label.text = String(sensorData.sensor3Force)
-                creationDateLabel.text = String(sensorData.creationDate)
+                
+                print("Sensor TimeStamp: \(sensorData.sensorTimeStampInMilliseconds)")
+                //dd.MM.yy, hh:mm:ss:SSS
+                
+                let dateFormater = NSDateFormatter()
+                dateFormater.dateFormat = "dd.MM.yy, hh:mm:ss,SSS"
+                let intervalFormater = NSDateFormatter()
+                intervalFormater.dateFormat = "mm:ss,SSS"
+                
+                creationDateLabel.text = dateFormater.stringFromDate(sensorData.creationDate)
+                timeIntervalLabel.text = "\(sensorData.sensorTimeStampInMilliseconds - Int(startInterval)) ms"
+//                    intervalFormater.stringFromDate(NSDate(timeIntervalSince1970: startInterval + (Double(sensorData.sensorTimeStampInMilliseconds)/1000)))
+//                timeIntervalLabel.text = intervalFormater.stringFromDate(NSDate(timeIntervalSince1970: (sensorData.creationDate.timeIntervalSince1970 - startInterval))) // String(sensorData.creationDate.timeIntervalSince1970 - startInterval)
                 
                 
             }
@@ -118,7 +147,7 @@ class RecordingDetailViewController: UIViewController, UITableViewDelegate, UITa
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(sensorDataArray.count)
+//        print(sensorDataArray.count)
         return sensorDataArray.count
         //recordArray!.count
     }

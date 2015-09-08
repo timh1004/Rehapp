@@ -115,9 +115,9 @@ class ArduinoCommunicationManager: NSObject, BLEDiscoveryDelegate, BLEServiceDel
 //        print("Length :\(length)")
         
         
-        if (length == 6) {
+        if (length == 8) {
             
-            for var i = 0; i < length; i+=6 {
+            for var i = 0; i < length; i+=8 {
                 
 //                print("Data0: \(data[0])")
 //                print("Data1: \(data[1])")
@@ -131,7 +131,7 @@ class ArduinoCommunicationManager: NSObject, BLEDiscoveryDelegate, BLEServiceDel
                 let sensor2Force = transformReceivedUIntsToInt([data[2], data[3]])
                 let sensor3Force = transformReceivedUIntsToInt([data[4], data[5]])
                 
-//                let sensorTimestampInMilliseconds =  transformReceivedUIntsToInt([data[6], data[7]])
+                let sensorTimestampInMilliseconds =  transformReceivedUIntsToInt([data[6], data[7]])
                 
                 
 //                print(sensorTimestampInMilliseconds)
@@ -143,7 +143,8 @@ class ArduinoCommunicationManager: NSObject, BLEDiscoveryDelegate, BLEServiceDel
 //                print("sensor3Force: \(sensor3Force)")
 //                print("time: \(sensorTimestampInMilliseconds)")
                 
-                let sensorData = SensorData(sensor1Force: sensor1Force, sensor2Force: sensor2Force, sensor3Force: sensor3Force)
+                
+                let sensorData = SensorData(sensor1Force: sensor1Force, sensor2Force: sensor2Force, sensor3Force: sensor3Force, sensorTimeStamp: sensorTimestampInMilliseconds)
                 
                 if let delegate = self.sensorDataDelegate {
                     delegate.didReceiveData(sensorData)

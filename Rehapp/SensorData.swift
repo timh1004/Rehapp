@@ -10,7 +10,7 @@
 import Foundation
 
 class SensorData {
-//    let sensorTimeStampInMilliseconds: Int
+    let sensorTimeStampInMilliseconds: Int
     let creationDate: NSDate
     let sensor1Force: Int
     let sensor2Force: Int
@@ -20,8 +20,8 @@ class SensorData {
 //        return sensorID == 1
 //    }
 
-    init(sensor1Force: Int, sensor2Force: Int, sensor3Force: Int, creationDate: NSDate = NSDate()) {
-//        self.sensorTimeStampInMilliseconds = sensorTimeStamp
+    init(sensor1Force: Int, sensor2Force: Int, sensor3Force: Int, creationDate: NSDate = NSDate(), sensorTimeStamp: Int) {
+        self.sensorTimeStampInMilliseconds = sensorTimeStamp
         self.creationDate = creationDate
         self.sensor1Force = sensor1Force
         self.sensor2Force = sensor2Force
@@ -32,11 +32,11 @@ class SensorData {
     //MARK: JSON Methods
     
     func toDictionary() -> Dictionary<String, AnyObject> {
-        return ["creationDate":creationDate.timeIntervalSince1970, "sensor1Force":self.sensor1Force, "sensor2Force":sensor2Force, "sensor3Force":sensor3Force]
+        return ["sensorTimeStamp": self.sensorTimeStampInMilliseconds, "creationDate":creationDate.timeIntervalSince1970, "sensor1Force":self.sensor1Force, "sensor2Force":sensor2Force, "sensor3Force":sensor3Force]
     }
     
     init(fromDictionary: Dictionary<String, AnyObject>) {
-//        self.sensorTimeStampInMilliseconds = fromDictionary["sensorTimeStamp"] as! Int;
+        self.sensorTimeStampInMilliseconds = fromDictionary["sensorTimeStamp"] as! Int;
         self.creationDate = NSDate(timeIntervalSince1970: fromDictionary["creationDate"] as! NSTimeInterval)
         self.sensor1Force = fromDictionary["sensor1Force"] as! Int
         self.sensor2Force = fromDictionary["sensor2Force"] as! Int
