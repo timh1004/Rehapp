@@ -9,21 +9,22 @@
 import Foundation
 import UIKit
 
-// doesn't work
-//extension String {
-//    func chopPrefix(count: Int = 1) -> String {
-//        return self.substringFromIndex(advance(self.startIndex, count))
-//    }
-//    
-//    func chopSuffix(count: Int = 1) -> String {
-//        return self.substringToIndex(advance(self.endIndex, -count))
-//    }
-//}
+extension String {
+    subscript (r: Range<Int>) -> String {
+        get {
+            let startIndex = self.startIndex.advancedBy(r.startIndex)
+            let endIndex = self.startIndex.advancedBy(r.endIndex - r.startIndex)
+            
+            return self[Range(start: startIndex, end: endIndex)]
+        }
+    }
+}
 
 class RecordingsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     
     @IBOutlet var tableView: UITableView!
+
     
     var sortedRecordArray: [Record]!
     var json: JSON!
@@ -34,6 +35,9 @@ class RecordingsViewController: UIViewController, UITableViewDelegate, UITableVi
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateTableViewOnNotification:", name: "newFileWritten", object: nil)
 //        recordArray = FileHandler.listFilesAtDocumentDirectory()
         // Nur die JSON Files, sortieren nach aufsteigender Nummer
+        
+        sortedRecordArray = getRecordArray()
+        
     }
     
     func getRecordArray() -> [Record] {
@@ -64,13 +68,12 @@ class RecordingsViewController: UIViewController, UITableViewDelegate, UITableVi
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return getRecordArray().count
+        return sortedRecordArray.count
 //        return recordArray!.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as UITableViewCell
-        sortedRecordArray = getRecordArray()
         var foot = String()
         var exercise = String()
         if sortedRecordArray[indexPath.row].foot {foot = "Left"} else {foot = "Right"}
@@ -107,6 +110,7 @@ class RecordingsViewController: UIViewController, UITableViewDelegate, UITableVi
 //    }
 
     func updateTableViewOnNotification(notification: NSNotification) {
+        sortedRecordArray = getRecordArray()
         tableView.reloadData()
     }
     
@@ -115,6 +119,7 @@ class RecordingsViewController: UIViewController, UITableViewDelegate, UITableVi
             let destination = segue.destinationViewController as! RecordingDetailViewController
             let indexPath = tableView.indexPathForSelectedRow
             destination.fileName = "\(sortedRecordArray[indexPath!.row].id).json"
+            destination.record = sortedRecordArray[indexPath!.row]
             
             destination.hidesBottomBarWhenPushed = true
         }

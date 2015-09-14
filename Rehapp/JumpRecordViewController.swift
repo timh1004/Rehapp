@@ -45,7 +45,6 @@ class JumpRecordViewController: UIViewController, UITextFieldDelegate, SensorDat
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         sensor1ForceView.layer.cornerRadius = 25
         sensor2ForceView.layer.cornerRadius = 25
         sensor3ForceView.layer.cornerRadius = 25

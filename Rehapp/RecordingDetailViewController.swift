@@ -20,8 +20,13 @@ class RecordingDetailViewController: UIViewController, UITableViewDelegate, UITa
     @IBOutlet weak var sensor3Label: UILabel!
     @IBOutlet weak var creationDateLabel: UILabel!
     @IBOutlet var timeIntervalLabel: UILabel!
+    
+    @IBAction func barButtonItemClicked(sender: AnyObject) {
+        self.performSegueWithIdentifier("showInformationSegue", sender: self)
+    }
 //    var recordArray: [String]!
     var json: JSON!
+    var record: Record!
     
     var fileName: String!
     var sensorDataArray = [SensorData]()
@@ -59,64 +64,66 @@ class RecordingDetailViewController: UIViewController, UITableViewDelegate, UITa
         sensor2Label.textColor = ChartColors.blueColor()
         sensor3Label.textColor = ChartColors.redColor()
         
-        self.title = fileName
-        self.navigationItem.setRightBarButtonItem(UIBarButtonItem(barButtonSystemItem: .Search, target: self, action: "barButtonItemClicked:"), animated: true)
+        self.title = "\(record.id).json"
+        
+        self.navigationItem.setRightBarButtonItem(UIBarButtonItem(image: UIImage(named: "info-icon"), style: .Plain, target: self, action: "barButtonItemClicked:"), animated: true)
         
         if let dataFromString = FileHandler.readFromFile(fileName).dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false) {
             json = JSON(data: dataFromString)
         }
         
         
-        print(json["id"].stringValue)
-        
-        isLeftFoot = json["foot"].boolValue
+        isLeftFoot = record.foot//json["foot"].boolValue
 //        print("isLeftFoot \(isLeftFoot)")
         
-        if let recordArray = json["sensorData"].array {
+//        let sensorDataArray: [SensorData]!
+        sensorDataArray = record.sensorData
+        //let recordArray = record.sensorData {//json["sensorData"].array {
+        
+        let firstEntry = sensorDataArray[0]
+        startInterval = Double(firstEntry.sensorTimeStampInMilliseconds)//(firstEntry["sensorTimeStamp"].double!)
+        print("start Interval: \(startInterval)")
+        
+        for sensorData in sensorDataArray {
             
-            let firstEntry = recordArray[0]
-            startInterval = (firstEntry["sensorTimeStamp"].double!)
-            print("start Interval: \(startInterval)")
+            sensor1Array.append(Float(sensorData.sensor1Force))
+            sensor2Array.append(Float(sensorData.sensor2Force))
+            sensor3Array.append(Float(sensorData.sensor3Force))
             
-            for sensorDataDict in recordArray {
-                
-//                var creationDate: NSDate? = sensorDataDict["creationDate"].NSd
-//                let sensorTimeStamp: Int? = sensorDataDict["sensorTimeStamp"].int
-                let sensor1Force: Int? = sensorDataDict["sensor1Force"].int
-                let sensor2Force: Int? = sensorDataDict["sensor2Force"].int
-                let sensor3Force: Int? = sensorDataDict["sensor3Force"].int
-                let sensorTimeStamp: Int? = sensorDataDict["sensorTimeStamp"].int
-                let creationDate: NSDate? = NSDate(timeIntervalSince1970: NSTimeInterval(sensorDataDict["creationDate"].double!))
-                
-                let sensorData = SensorData(sensor1Force: sensor1Force!, sensor2Force: sensor2Force!, sensor3Force: sensor3Force!, creationDate: creationDate!, sensorTimeStamp: sensorTimeStamp!)
-                sensorDataArray.append(sensorData)
-                sensor1Array.append(Float(sensor1Force!))
-                sensor2Array.append(Float(sensor2Force!))
-                sensor3Array.append(Float(sensor3Force!))
-                
-                
-            }
+            //                var creationDate: NSDate? = sensorDataDict["creationDate"].NSd
+            //                let sensorTimeStamp: Int? = sensorDataDict["sensorTimeStamp"].int
+            //                let sensor1Force: Int? = sensorDataDict["sensor1Force"].int
+            //                let sensor2Force: Int? = sensorDataDict["sensor2Force"].int
+            //                let sensor3Force: Int? = sensorDataDict["sensor3Force"].int
+            //                let sensorTimeStamp: Int? = sensorDataDict["sensorTimeStamp"].int
+            //                let creationDate: NSDate? = NSDate(timeIntervalSince1970: NSTimeInterval(sensorDataDict["creationDate"].double!))
             
-            sensor1Series = ChartSeries(sensor1Array)
-            sensor2Series = ChartSeries(sensor2Array)
-            sensor3Series = ChartSeries(sensor3Array)
-            sensor1Series!.color = ChartColors.greenColor()
-            sensor2Series!.color = ChartColors.blueColor()
-            sensor3Series!.color = ChartColors.redColor()
-            var series = [ChartSeries]()
-            if isLeftFoot {
-                series = [sensor1Series!, sensor3Series!]
-            } else {
-                series = [sensor1Series!, sensor2Series!]
-            }
+            //let sensorData = SensorData(sensor1Force: sensor1Force!, sensor2Force: sensor2Force!, sensor3Force: sensor3Force!, creationDate: creationDate!, sensorTimeStamp: sensorTimeStamp!)
+            //                sensorDataArray.append(sensorData)
+            //                sensor1Array.append(Float(sensor1Force!))
+            //                sensor2Array.append(Float(sensor2Force!))
+            //                sensor3Array.append(Float(sensor3Force!))
             
-            chart.addSeries(series)
             
         }
         
+        sensor1Series = ChartSeries(sensor1Array)
+        sensor2Series = ChartSeries(sensor2Array)
+        sensor3Series = ChartSeries(sensor3Array)
+        sensor1Series!.color = ChartColors.greenColor()
+        sensor2Series!.color = ChartColors.blueColor()
+        sensor3Series!.color = ChartColors.redColor()
+        var series = [ChartSeries]()
+        if isLeftFoot {
+            series = [sensor1Series!, sensor3Series!]
+        } else {
+            series = [sensor1Series!, sensor2Series!]
+        }
+        
+        chart.addSeries(series)
         
     }
-    
+
     func didTouchChart(chart: Chart, indexes: Array<Int?>, x: Float, left: CGFloat) {
 //        print("touch")
         for (_, dataIndex) in indexes.enumerate() {
@@ -196,6 +203,14 @@ class RecordingDetailViewController: UIViewController, UITableViewDelegate, UITa
         // Redraw chart on rotation
         chart.setNeedsDisplay()
         
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "showInformationSegue" {
+            let destination = segue.destinationViewController as! RecordInfoViewController
+            destination.record = record
+        }
+
     }
     
     

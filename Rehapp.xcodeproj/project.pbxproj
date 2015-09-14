@@ -11,6 +11,7 @@
 		002AE9131B8B9C4D00E552DE /* ChartColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002AE9101B8B9C4D00E552DE /* ChartColors.swift */; };
 		002AE9141B8B9C4D00E552DE /* ChartSeries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002AE9111B8B9C4D00E552DE /* ChartSeries.swift */; };
 		080D95F71B53E2730056EC69 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080D95F61B53E2730056EC69 /* SwiftyJSON.swift */; };
+		081879521BA7082100DD3CE7 /* RecordInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081879511BA7082100DD3CE7 /* RecordInfoViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		08335C351B9F250B00F29C5B /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08335C341B9F250B00F29C5B /* Record.swift */; settings = {ASSET_TAGS = (); }; };
 		086DC6571B418FCE00A7BAFF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086DC6561B418FCE00A7BAFF /* AppDelegate.swift */; };
 		086DC65A1B418FCE00A7BAFF /* Rehapp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 086DC6581B418FCE00A7BAFF /* Rehapp.xcdatamodeld */; };
@@ -46,6 +47,7 @@
 		002AE9101B8B9C4D00E552DE /* ChartColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartColors.swift; sourceTree = "<group>"; };
 		002AE9111B8B9C4D00E552DE /* ChartSeries.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartSeries.swift; sourceTree = "<group>"; };
 		080D95F61B53E2730056EC69 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
+		081879511BA7082100DD3CE7 /* RecordInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordInfoViewController.swift; sourceTree = "<group>"; };
 		08335C341B9F250B00F29C5B /* Record.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
 		086DC6511B418FCE00A7BAFF /* Rehapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rehapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		086DC6551B418FCE00A7BAFF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -119,8 +121,18 @@
 				086DC65B1B418FCE00A7BAFF /* JumpRecordViewController.swift */,
 				08F6675B1B54476800E66A4F /* RecordingsViewController.swift */,
 				08F6675F1B54FC5600E66A4F /* RecordingDetailViewController.swift */,
+				081879511BA7082100DD3CE7 /* RecordInfoViewController.swift */,
 			);
 			name = "View Controller";
+			sourceTree = "<group>";
+		};
+		081879531BA7314A00DD3CE7 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				08335C341B9F250B00F29C5B /* Record.swift */,
+				086DC6951B41A18500A7BAFF /* SensorData.swift */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 		086DC6481B418FCE00A7BAFF = {
@@ -147,13 +159,12 @@
 				002AE90E1B8B9C4D00E552DE /* Chart */,
 				080D95F41B53B39A0056EC69 /* SwiftyJSON */,
 				086DC6841B419C3400A7BAFF /* BLE */,
-				086DC6561B418FCE00A7BAFF /* AppDelegate.swift */,
 				080D95F51B53B5FA0056EC69 /* View Controller */,
 				086DC6851B419D2800A7BAFF /* ArduinoCommunicationManager.swift */,
 				086DC6911B41A05C00A7BAFF /* SensorDataDelegate.swift */,
-				08335C341B9F250B00F29C5B /* Record.swift */,
-				086DC6951B41A18500A7BAFF /* SensorData.swift */,
 				086DC69C1B41B18800A7BAFF /* FileHandler.swift */,
+				081879531BA7314A00DD3CE7 /* Model */,
+				086DC6561B418FCE00A7BAFF /* AppDelegate.swift */,
 				086DC6601B418FCE00A7BAFF /* Images.xcassets */,
 				086DC65D1B418FCE00A7BAFF /* Main.storyboard */,
 				086DC6621B418FCE00A7BAFF /* LaunchScreen.xib */,
@@ -308,6 +319,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				086DC6821B419C2500A7BAFF /* BLEHelper.m in Sources */,
+				081879521BA7082100DD3CE7 /* RecordInfoViewController.swift in Sources */,
 				086DC6811B419C2500A7BAFF /* BLEDiscovery.m in Sources */,
 				086DC6921B41A05C00A7BAFF /* SensorDataDelegate.swift in Sources */,
 				080D95F71B53E2730056EC69 /* SwiftyJSON.swift in Sources */,

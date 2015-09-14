@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Record: Equatable, Hashable, Comparable {
+class Record: Equatable, Hashable, Comparable, CustomStringConvertible {
     let id: Int
     let gender: Bool
     let foot: Bool
@@ -22,6 +22,10 @@ class Record: Equatable, Hashable, Comparable {
     let heightInCm: Int
     let name: String
     let weightInKg: Int
+    
+    var description: String {
+        return "id: \(id), isSideHops: \(isSideHops) name: \(name), age: \(age), gender: \(gender), foot: \(foot), weight: \(weightInKg), height: \(heightInCm), jumpDistance: \(jumpDistanceInCm), jumpDuration: \(jumpDurationInMs))"
+    }
     
     init(id: Int, gender: Bool, foot: Bool, additionalInformation: String, let age: Int, jumpDurationInMs: Int, isSideHops: Bool, jumpCount: Int, sensorData: [SensorData], jumpDistanceInCm: Int, heightInCm: Int, name: String, weightInKg: Int) {
         
@@ -50,15 +54,19 @@ class Record: Equatable, Hashable, Comparable {
         self.gender = fromDictionary["gender"] as! Bool
         self.foot = fromDictionary["foot"] as! Bool
         self.additionalInformation = fromDictionary["additionalInformation"] as? String ?? ""
-        self.age = fromDictionary["age"] as? Int ?? 0
+        self.age = Int(fromDictionary["age"] as? String ?? "0") ?? 0
         self.jumpDurationInMs = fromDictionary["jumpDurationInMs"] as? Int ?? 0
         self.isSideHops = fromDictionary["isSideHops"] as! Bool
         self.jumpCount = fromDictionary["jumpCount"] as? Int ?? 0
         self.sensorData = (fromDictionary["sensorData"] as! Array).map{dict in SensorData(fromDictionary: dict)}
         self.jumpDistanceInCm = fromDictionary["jumpDistanceInCm"] as? Int ?? 0
-        self.heightInCm = fromDictionary["heightInCm"] as? Int ?? 0
+        self.heightInCm = Int(fromDictionary["heightInCm"] as? String ?? "0") ?? 0
         self.name = fromDictionary["name"] as? String ?? ""
-        self.weightInKg = fromDictionary["weightInKg"] as? Int ?? 0
+        self.weightInKg = Int(fromDictionary["weightInKg"] as? String ?? "0") ?? 0
+        
+        print("Height From Dictionary")
+        print(fromDictionary["heightInCm"] as? String)
+        
     }
 }
 
