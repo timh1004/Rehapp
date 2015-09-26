@@ -72,6 +72,23 @@ class RecordInfoViewController: UIViewController {
         
         additionalInformationTextView.text = record.additionalInformation
         
+        // Algorithmus
+        
+        if record.isSideHops {
+            
+            let minThreshold = NSUserDefaults.standardUserDefaults().integerForKey("minThreshold")
+            let maxThreshold = NSUserDefaults.standardUserDefaults().integerForKey("maxThreshold")
+            print("Min: \(minThreshold), Max: \(maxThreshold)")
+            
+            print("\(SideHopsAlgorithm.calculateJumpCount(record, minThreshold: minThreshold, maxThreshold: maxThreshold))")
+        } else {
+            
+            let startThreshold = NSUserDefaults.standardUserDefaults().integerForKey("startThreshold")
+            let endThreshold = NSUserDefaults.standardUserDefaults().integerForKey("maxThreshold")
+            print(OneLegHopAlgorithm.calculateResultDict(record, startThreshold: startThreshold, endThreshold: endThreshold))
+            
+        }
+
         
     }
     

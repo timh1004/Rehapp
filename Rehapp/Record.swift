@@ -64,8 +64,8 @@ class Record: Equatable, Hashable, Comparable, CustomStringConvertible {
         self.name = fromDictionary["name"] as? String ?? ""
         self.weightInKg = Int(fromDictionary["weightInKg"] as? String ?? "0") ?? 0
         
-        print("Height From Dictionary")
-        print(fromDictionary["heightInCm"] as? String)
+//        print("Height From Dictionary")
+//        print(fromDictionary["heightInCm"] as? String)
         
     }
 }

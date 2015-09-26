@@ -76,14 +76,30 @@ class RecordingsViewController: UIViewController, UITableViewDelegate, UITableVi
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as UITableViewCell
         var foot = String()
         var exercise = String()
-        if sortedRecordArray[indexPath.row].foot {foot = "Left"} else {foot = "Right"}
-        if sortedRecordArray[indexPath.row].isSideHops {exercise = "Side Hops"} else {exercise = "One-Leg Hop"}
+        var cellText = String()
         
+        let dateFormater = NSDateFormatter()
+        dateFormater.dateFormat = "dd.MM.yy, HH:mm:ss.SSS"
         
-        cell.textLabel?.text = "ID: \(sortedRecordArray[indexPath.row].id) - \(exercise) - \(foot) Foot"
-        cell.detailTextLabel?.text = "test"
-        //Weitere Details einfügen (Name des Probanden etc.)
+        let creationDate = sortedRecordArray[indexPath.row].sensorData[0].creationDate
         
+        if sortedRecordArray[indexPath.row].foot {
+            foot = "Left"
+        } else {
+            foot = "Right"
+        }
+        
+        if sortedRecordArray[indexPath.row].isSideHops {
+            exercise = "Side Hops"
+            cellText = "ID: \(sortedRecordArray[indexPath.row].id) - \(exercise) - \(foot) Foot - Jump count: \(sortedRecordArray[indexPath.row].jumpCount)"
+        } else {
+            exercise = "One-Leg Hop"
+            cellText = "ID: \(sortedRecordArray[indexPath.row].id) - \(exercise) - \(foot) Foot - Distance: \(sortedRecordArray[indexPath.row].jumpDistanceInCm) cm - Calculated jump duration: \(OneLegHopAlgorithm.calculateResult(sortedRecordArray[indexPath.row])) ms"
+            print("jumpDuration: \(OneLegHopAlgorithm.calculateResult(sortedRecordArray[indexPath.row]))")
+        }
+        
+        cell.textLabel?.text = cellText
+        cell.detailTextLabel?.text = "Name: \(sortedRecordArray[indexPath.row].name), Creation date: \(dateFormater.stringFromDate(creationDate))"
         
         return cell
     }
@@ -121,7 +137,7 @@ class RecordingsViewController: UIViewController, UITableViewDelegate, UITableVi
             destination.fileName = "\(sortedRecordArray[indexPath!.row].id).json"
             destination.record = sortedRecordArray[indexPath!.row]
             
-            destination.hidesBottomBarWhenPushed = true
+//            destination.hidesBottomBarWhenPushed = true
         }
     }
     

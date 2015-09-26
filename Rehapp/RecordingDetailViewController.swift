@@ -9,11 +9,9 @@
 import Foundation
 import UIKit
 
-class RecordingDetailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ChartDelegate {
+class RecordingDetailViewController: UIViewController, ChartDelegate {
     
     @IBOutlet weak var chart: Chart!
-    
-    @IBOutlet var tableView: UITableView!
     
     @IBOutlet weak var sensor1Label: UILabel!
     @IBOutlet weak var sensor2Label: UILabel!
@@ -24,18 +22,26 @@ class RecordingDetailViewController: UIViewController, UITableViewDelegate, UITa
     @IBAction func barButtonItemClicked(sender: AnyObject) {
         self.performSegueWithIdentifier("showInformationSegue", sender: self)
     }
-//    var recordArray: [String]!
+    
     var json: JSON!
     var record: Record!
     
     var fileName: String!
     var sensorDataArray = [SensorData]()
     
+    var sideHopsJumpTimes: [Int] = []
+    var index = 0
+    
+    var oneLegHopStartTime = 0
+    var oneLegHopEndTime = 0
+    
     var isLeftFoot = Bool()
     
     var sensor1Array = [Float]()
     var sensor2Array = [Float]()
     var sensor3Array = [Float]()
+    var jumpArray = [Float]()
+    
     var creationDateArray = [String]()
     
     var startInterval: NSTimeInterval!
@@ -43,6 +49,7 @@ class RecordingDetailViewController: UIViewController, UITableViewDelegate, UITa
     var sensor1Series: ChartSeries?
     var sensor2Series: ChartSeries?
     var sensor3Series: ChartSeries?
+    var jumpSeries: ChartSeries?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,6 +79,23 @@ class RecordingDetailViewController: UIViewController, UITableViewDelegate, UITa
             json = JSON(data: dataFromString)
         }
         
+        if record.isSideHops {
+            
+            let minThreshold = NSUserDefaults.standardUserDefaults().integerForKey("minThreshold")
+            let maxThreshold = NSUserDefaults.standardUserDefaults().integerForKey("maxThreshold")
+            print("Min: \(minThreshold), Max: \(maxThreshold)")
+            
+            sideHopsJumpTimes = SideHopsAlgorithm.calculateJumpCountTimes(record, minThreshold: minThreshold, maxThreshold: maxThreshold)
+            
+            print("\(SideHopsAlgorithm.calculateJumpCountTimes(record, minThreshold: minThreshold, maxThreshold: maxThreshold))")
+        } else {
+            
+            let startThreshold = NSUserDefaults.standardUserDefaults().integerForKey("startThreshold")
+            let endThreshold = NSUserDefaults.standardUserDefaults().integerForKey("maxThreshold")
+            let dict = (OneLegHopAlgorithm.calculateResultDict(record, startThreshold: startThreshold, endThreshold: endThreshold))
+            oneLegHopStartTime = dict["jumpStartTime"]!
+            oneLegHopEndTime = dict["jumpEndTime"]!
+        }
         
         isLeftFoot = record.foot//json["foot"].boolValue
 //        print("isLeftFoot \(isLeftFoot)")
@@ -90,19 +114,28 @@ class RecordingDetailViewController: UIViewController, UITableViewDelegate, UITa
             sensor2Array.append(Float(sensorData.sensor2Force))
             sensor3Array.append(Float(sensorData.sensor3Force))
             
-            //                var creationDate: NSDate? = sensorDataDict["creationDate"].NSd
-            //                let sensorTimeStamp: Int? = sensorDataDict["sensorTimeStamp"].int
-            //                let sensor1Force: Int? = sensorDataDict["sensor1Force"].int
-            //                let sensor2Force: Int? = sensorDataDict["sensor2Force"].int
-            //                let sensor3Force: Int? = sensorDataDict["sensor3Force"].int
-            //                let sensorTimeStamp: Int? = sensorDataDict["sensorTimeStamp"].int
-            //                let creationDate: NSDate? = NSDate(timeIntervalSince1970: NSTimeInterval(sensorDataDict["creationDate"].double!))
             
-            //let sensorData = SensorData(sensor1Force: sensor1Force!, sensor2Force: sensor2Force!, sensor3Force: sensor3Force!, creationDate: creationDate!, sensorTimeStamp: sensorTimeStamp!)
-            //                sensorDataArray.append(sensorData)
-            //                sensor1Array.append(Float(sensor1Force!))
-            //                sensor2Array.append(Float(sensor2Force!))
-            //                sensor3Array.append(Float(sensor3Force!))
+            if record.isSideHops {
+                
+                if sensorData.sensorTimeStampInMilliseconds < sideHopsJumpTimes[index] {
+                    jumpArray.append(Float(0))
+                } else if sensorData.sensorTimeStampInMilliseconds >= sideHopsJumpTimes[index] && sensorData.sensorTimeStampInMilliseconds <= sideHopsJumpTimes[index+1] {
+                    jumpArray.append(Float(1024))
+                } else if index <= (sideHopsJumpTimes.count - 3){
+                    jumpArray.append(Float(1024))
+                    index += 2
+                } else {
+                    jumpArray.append(Float(0))
+                }
+            
+                
+            } else {
+                if sensorData.sensorTimeStampInMilliseconds < oneLegHopStartTime || sensorData.sensorTimeStampInMilliseconds > oneLegHopEndTime {
+                    jumpArray.append(Float(0))
+                } else {
+                    jumpArray.append(Float(1024))
+                }
+            }
             
             
         }
@@ -110,14 +143,20 @@ class RecordingDetailViewController: UIViewController, UITableViewDelegate, UITa
         sensor1Series = ChartSeries(sensor1Array)
         sensor2Series = ChartSeries(sensor2Array)
         sensor3Series = ChartSeries(sensor3Array)
+        jumpSeries = ChartSeries(jumpArray)
+        
         sensor1Series!.color = ChartColors.greenColor()
         sensor2Series!.color = ChartColors.blueColor()
         sensor3Series!.color = ChartColors.redColor()
+        jumpSeries?.color = ChartColors.darkRedColor()
+        jumpSeries?.area = true
+        jumpSeries?.line = false
+        
         var series = [ChartSeries]()
         if isLeftFoot {
-            series = [sensor1Series!, sensor3Series!]
+            series = [sensor1Series!, sensor3Series!, jumpSeries!]
         } else {
-            series = [sensor1Series!, sensor2Series!]
+            series = [sensor1Series!, sensor2Series!, jumpSeries!]
         }
         
         chart.addSeries(series)
@@ -139,9 +178,9 @@ class RecordingDetailViewController: UIViewController, UITableViewDelegate, UITa
                 //dd.MM.yy, hh:mm:ss:SSS
                 
                 let dateFormater = NSDateFormatter()
-                dateFormater.dateFormat = "dd.MM.yy, hh:mm:ss,SSS"
+                dateFormater.dateFormat = "dd.MM.yy, HH:mm:ss.SSS"
                 let intervalFormater = NSDateFormatter()
-                intervalFormater.dateFormat = "mm:ss,SSS"
+                intervalFormater.dateFormat = "mm:ss.SSS"
                 
                 creationDateLabel.text = dateFormater.stringFromDate(sensorData.creationDate)
                 timeIntervalLabel.text = "\(sensorData.sensorTimeStampInMilliseconds - Int(startInterval)) ms"
@@ -163,38 +202,6 @@ class RecordingDetailViewController: UIViewController, UITableViewDelegate, UITa
         //recordArray!.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as UITableViewCell
-        
-        let sensorData: SensorData = sensorDataArray[indexPath.row]
-//        let sensorStampInMilliseconds = String(sensorData.sensorTimeStampInMilliseconds)
-        let sensor1Force = String(sensorData.sensor1Force)
-        let sensor2Force = String(sensorData.sensor2Force)
-        let sensor3Force = String(sensorData.sensor3Force)
-        let creationDate = String(sensorData.creationDate)
-        
-//        let sensor1ForceAttributedString = NSMutableAttributedString(string: sensor1Force)
-        
-        let string = "Sensor1: \(sensor1Force), Sensor2: \(sensor2Force), Sensor3: \(sensor3Force)"
-        let attributedString = NSMutableAttributedString(string: string as String)
-//        var range = (string as NSString).rangeOfString("\(departure.destination)")
-        
-        let sensor1Attributes = [NSForegroundColorAttributeName: ChartColors.greenColor()]
-        let sensor2Attributes = [NSForegroundColorAttributeName: ChartColors.blueColor()]
-        let sensor3Attributes = [NSForegroundColorAttributeName: ChartColors.redColor()]
-        
-        attributedString.addAttributes(sensor1Attributes, range: (string as NSString).rangeOfString("\(sensor1Force)"))
-        attributedString.addAttributes(sensor2Attributes, range: (string as NSString).rangeOfString("\(sensor2Force)"))
-        attributedString.addAttributes(sensor3Attributes, range: (string as NSString).rangeOfString("\(sensor3Force)"))
-        
-        cell.textLabel?.attributedText = attributedString
-//        cell.textLabel?.text = ("Force1: \(sensor1Force), Force2: \(sensor2Force), Force3: \(sensor3Force)")
-        //recordArray[indexPath.row]
-        cell.detailTextLabel?.text = creationDate
-        
-        return cell
-        
-    }
     
     override func viewWillTransitionToSize(size: CGSize, withTransitionCoordinator coordinator: UIViewControllerTransitionCoordinator) {
         

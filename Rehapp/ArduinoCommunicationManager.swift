@@ -33,7 +33,7 @@ class ArduinoCommunicationManager: NSObject, BLEDiscoveryDelegate, BLEServiceDel
     
     func isAbleToReceiveSensorData() -> Bool {
         let foundPeripherals = BLEDiscovery.sharedInstance().foundPeripherals.count
-        NSLog("Found %d Peripherals", foundPeripherals)
+//        NSLog("Found %d Peripherals", foundPeripherals)
         return foundPeripherals == numberOfRequiredSensors
     }
     

@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Rehapp WatchApp.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 		<key>Rehapp.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -12,6 +17,16 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>081879551BA732B400DD3CE7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>081879611BA732B500DD3CE7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>086DC6501B418FCE00A7BAFF</key>
 		<dict>
 			<key>primary</key>

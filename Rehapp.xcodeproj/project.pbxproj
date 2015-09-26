@@ -12,7 +12,17 @@
 		002AE9141B8B9C4D00E552DE /* ChartSeries.swift in Sources */ = {isa = PBXBuildFile; fileRef = 002AE9111B8B9C4D00E552DE /* ChartSeries.swift */; };
 		080D95F71B53E2730056EC69 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 080D95F61B53E2730056EC69 /* SwiftyJSON.swift */; };
 		081879521BA7082100DD3CE7 /* RecordInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081879511BA7082100DD3CE7 /* RecordInfoViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		0818795A1BA732B400DD3CE7 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 081879581BA732B400DD3CE7 /* Interface.storyboard */; };
+		0818795C1BA732B400DD3CE7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0818795B1BA732B400DD3CE7 /* Assets.xcassets */; };
+		081879631BA732B500DD3CE7 /* Rehapp WatchApp Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 081879621BA732B500DD3CE7 /* Rehapp WatchApp Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		081879681BA732B500DD3CE7 /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081879671BA732B500DD3CE7 /* InterfaceController.swift */; };
+		0818796A1BA732B500DD3CE7 /* ExtensionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 081879691BA732B500DD3CE7 /* ExtensionDelegate.swift */; };
+		0818796C1BA732B500DD3CE7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0818796B1BA732B500DD3CE7 /* Assets.xcassets */; };
+		081879701BA732B500DD3CE7 /* Rehapp WatchApp.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 081879561BA732B400DD3CE7 /* Rehapp WatchApp.app */; };
 		08335C351B9F250B00F29C5B /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08335C341B9F250B00F29C5B /* Record.swift */; settings = {ASSET_TAGS = (); }; };
+		0859D28F1BB34B3200219683 /* SideHopsAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0859D28E1BB34B3200219683 /* SideHopsAlgorithm.swift */; settings = {ASSET_TAGS = (); }; };
+		0859D2911BB44E4400219683 /* SideHopsAlgorithmSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0859D2901BB44E4400219683 /* SideHopsAlgorithmSettingsViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		0859D2931BB44E5B00219683 /* SideHopsAlgorithmResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0859D2921BB44E5B00219683 /* SideHopsAlgorithmResultViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		086DC6571B418FCE00A7BAFF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086DC6561B418FCE00A7BAFF /* AppDelegate.swift */; };
 		086DC65A1B418FCE00A7BAFF /* Rehapp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 086DC6581B418FCE00A7BAFF /* Rehapp.xcdatamodeld */; };
 		086DC65C1B418FCE00A7BAFF /* JumpRecordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086DC65B1B418FCE00A7BAFF /* JumpRecordViewController.swift */; };
@@ -27,12 +37,30 @@
 		086DC6921B41A05C00A7BAFF /* SensorDataDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086DC6911B41A05C00A7BAFF /* SensorDataDelegate.swift */; };
 		086DC6961B41A18500A7BAFF /* SensorData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086DC6951B41A18500A7BAFF /* SensorData.swift */; };
 		086DC69D1B41B18800A7BAFF /* FileHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 086DC69C1B41B18800A7BAFF /* FileHandler.swift */; };
+		08C8E74B1BB03A9600AABB7D /* OneLegHopAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C8E74A1BB03A9600AABB7D /* OneLegHopAlgorithm.swift */; settings = {ASSET_TAGS = (); }; };
+		08C8E74D1BB05BF900AABB7D /* AlgorithmsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C8E74C1BB05BF900AABB7D /* AlgorithmsViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		08C8E74F1BB05E5900AABB7D /* OneLegHopAlgorithmSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C8E74E1BB05E5900AABB7D /* OneLegHopAlgorithmSettingsViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		08C8E7511BB06B2D00AABB7D /* OneLegHopAlgorithmResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08C8E7501BB06B2D00AABB7D /* OneLegHopAlgorithmResultViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		08F6675A1B54309F00E66A4F /* soles.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 08F667591B54309F00E66A4F /* soles.jpg */; };
 		08F6675C1B54476800E66A4F /* RecordingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F6675B1B54476800E66A4F /* RecordingsViewController.swift */; };
 		08F667601B54FC5600E66A4F /* RecordingDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 08F6675F1B54FC5600E66A4F /* RecordingDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		081879641BA732B500DD3CE7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 086DC6491B418FCE00A7BAFF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 081879611BA732B500DD3CE7;
+			remoteInfo = "Rehapp WatchApp Extension";
+		};
+		0818796E1BA732B500DD3CE7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 086DC6491B418FCE00A7BAFF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 081879551BA732B400DD3CE7;
+			remoteInfo = "Rehapp WatchApp";
+		};
 		086DC66A1B418FCF00A7BAFF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 086DC6491B418FCE00A7BAFF /* Project object */;
@@ -42,13 +70,50 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		081879741BA732B500DD3CE7 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				081879631BA732B500DD3CE7 /* Rehapp WatchApp Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		081879781BA732B500DD3CE7 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				081879701BA732B500DD3CE7 /* Rehapp WatchApp.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		002AE90F1B8B9C4D00E552DE /* Chart.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Chart.swift; sourceTree = "<group>"; };
 		002AE9101B8B9C4D00E552DE /* ChartColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartColors.swift; sourceTree = "<group>"; };
 		002AE9111B8B9C4D00E552DE /* ChartSeries.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartSeries.swift; sourceTree = "<group>"; };
 		080D95F61B53E2730056EC69 /* SwiftyJSON.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyJSON.swift; sourceTree = "<group>"; };
 		081879511BA7082100DD3CE7 /* RecordInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordInfoViewController.swift; sourceTree = "<group>"; };
+		081879561BA732B400DD3CE7 /* Rehapp WatchApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Rehapp WatchApp.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		081879591BA732B400DD3CE7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
+		0818795B1BA732B400DD3CE7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		0818795D1BA732B400DD3CE7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		081879621BA732B500DD3CE7 /* Rehapp WatchApp Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Rehapp WatchApp Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		081879671BA732B500DD3CE7 /* InterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceController.swift; sourceTree = "<group>"; };
+		081879691BA732B500DD3CE7 /* ExtensionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtensionDelegate.swift; sourceTree = "<group>"; };
+		0818796B1BA732B500DD3CE7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		0818796D1BA732B500DD3CE7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		08335C341B9F250B00F29C5B /* Record.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
+		0859D28E1BB34B3200219683 /* SideHopsAlgorithm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideHopsAlgorithm.swift; sourceTree = "<group>"; };
+		0859D2901BB44E4400219683 /* SideHopsAlgorithmSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideHopsAlgorithmSettingsViewController.swift; sourceTree = "<group>"; };
+		0859D2921BB44E5B00219683 /* SideHopsAlgorithmResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SideHopsAlgorithmResultViewController.swift; sourceTree = "<group>"; };
 		086DC6511B418FCE00A7BAFF /* Rehapp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rehapp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		086DC6551B418FCE00A7BAFF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		086DC6561B418FCE00A7BAFF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -73,12 +138,23 @@
 		086DC6951B41A18500A7BAFF /* SensorData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SensorData.swift; sourceTree = "<group>"; };
 		086DC6991B41B16000A7BAFF /* SwiftyJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwiftyJSON.h; sourceTree = "<group>"; };
 		086DC69C1B41B18800A7BAFF /* FileHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileHandler.swift; sourceTree = "<group>"; };
+		08C8E74A1BB03A9600AABB7D /* OneLegHopAlgorithm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OneLegHopAlgorithm.swift; sourceTree = "<group>"; };
+		08C8E74C1BB05BF900AABB7D /* AlgorithmsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlgorithmsViewController.swift; sourceTree = "<group>"; };
+		08C8E74E1BB05E5900AABB7D /* OneLegHopAlgorithmSettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OneLegHopAlgorithmSettingsViewController.swift; sourceTree = "<group>"; };
+		08C8E7501BB06B2D00AABB7D /* OneLegHopAlgorithmResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OneLegHopAlgorithmResultViewController.swift; sourceTree = "<group>"; };
 		08F667591B54309F00E66A4F /* soles.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = soles.jpg; sourceTree = "<group>"; };
 		08F6675B1B54476800E66A4F /* RecordingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordingsViewController.swift; sourceTree = "<group>"; };
 		08F6675F1B54FC5600E66A4F /* RecordingDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordingDetailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		0818795F1BA732B500DD3CE7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		086DC64E1B418FCE00A7BAFF /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -122,6 +198,11 @@
 				08F6675B1B54476800E66A4F /* RecordingsViewController.swift */,
 				08F6675F1B54FC5600E66A4F /* RecordingDetailViewController.swift */,
 				081879511BA7082100DD3CE7 /* RecordInfoViewController.swift */,
+				08C8E74C1BB05BF900AABB7D /* AlgorithmsViewController.swift */,
+				08C8E74E1BB05E5900AABB7D /* OneLegHopAlgorithmSettingsViewController.swift */,
+				08C8E7501BB06B2D00AABB7D /* OneLegHopAlgorithmResultViewController.swift */,
+				0859D2901BB44E4400219683 /* SideHopsAlgorithmSettingsViewController.swift */,
+				0859D2921BB44E5B00219683 /* SideHopsAlgorithmResultViewController.swift */,
 			);
 			name = "View Controller";
 			sourceTree = "<group>";
@@ -135,11 +216,34 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
+		081879571BA732B400DD3CE7 /* Rehapp WatchApp */ = {
+			isa = PBXGroup;
+			children = (
+				081879581BA732B400DD3CE7 /* Interface.storyboard */,
+				0818795B1BA732B400DD3CE7 /* Assets.xcassets */,
+				0818795D1BA732B400DD3CE7 /* Info.plist */,
+			);
+			path = "Rehapp WatchApp";
+			sourceTree = "<group>";
+		};
+		081879661BA732B500DD3CE7 /* Rehapp WatchApp Extension */ = {
+			isa = PBXGroup;
+			children = (
+				081879671BA732B500DD3CE7 /* InterfaceController.swift */,
+				081879691BA732B500DD3CE7 /* ExtensionDelegate.swift */,
+				0818796B1BA732B500DD3CE7 /* Assets.xcassets */,
+				0818796D1BA732B500DD3CE7 /* Info.plist */,
+			);
+			path = "Rehapp WatchApp Extension";
+			sourceTree = "<group>";
+		};
 		086DC6481B418FCE00A7BAFF = {
 			isa = PBXGroup;
 			children = (
 				086DC6531B418FCE00A7BAFF /* Rehapp */,
 				086DC66C1B418FCF00A7BAFF /* RehappTests */,
+				081879571BA732B400DD3CE7 /* Rehapp WatchApp */,
+				081879661BA732B500DD3CE7 /* Rehapp WatchApp Extension */,
 				086DC6521B418FCE00A7BAFF /* Products */,
 			);
 			sourceTree = "<group>";
@@ -149,6 +253,8 @@
 			children = (
 				086DC6511B418FCE00A7BAFF /* Rehapp.app */,
 				086DC6691B418FCE00A7BAFF /* RehappTests.xctest */,
+				081879561BA732B400DD3CE7 /* Rehapp WatchApp.app */,
+				081879621BA732B500DD3CE7 /* Rehapp WatchApp Extension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -162,6 +268,8 @@
 				080D95F51B53B5FA0056EC69 /* View Controller */,
 				086DC6851B419D2800A7BAFF /* ArduinoCommunicationManager.swift */,
 				086DC6911B41A05C00A7BAFF /* SensorDataDelegate.swift */,
+				08C8E74A1BB03A9600AABB7D /* OneLegHopAlgorithm.swift */,
+				0859D28E1BB34B3200219683 /* SideHopsAlgorithm.swift */,
 				086DC69C1B41B18800A7BAFF /* FileHandler.swift */,
 				081879531BA7314A00DD3CE7 /* Model */,
 				086DC6561B418FCE00A7BAFF /* AppDelegate.swift */,
@@ -218,6 +326,40 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		081879551BA732B400DD3CE7 /* Rehapp WatchApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 081879751BA732B500DD3CE7 /* Build configuration list for PBXNativeTarget "Rehapp WatchApp" */;
+			buildPhases = (
+				081879541BA732B400DD3CE7 /* Resources */,
+				081879741BA732B500DD3CE7 /* Embed App Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				081879651BA732B500DD3CE7 /* PBXTargetDependency */,
+			);
+			name = "Rehapp WatchApp";
+			productName = "Rehapp WatchApp";
+			productReference = 081879561BA732B400DD3CE7 /* Rehapp WatchApp.app */;
+			productType = "com.apple.product-type.application.watchapp2";
+		};
+		081879611BA732B500DD3CE7 /* Rehapp WatchApp Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 081879711BA732B500DD3CE7 /* Build configuration list for PBXNativeTarget "Rehapp WatchApp Extension" */;
+			buildPhases = (
+				0818795E1BA732B500DD3CE7 /* Sources */,
+				0818795F1BA732B500DD3CE7 /* Frameworks */,
+				081879601BA732B500DD3CE7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Rehapp WatchApp Extension";
+			productName = "Rehapp WatchApp Extension";
+			productReference = 081879621BA732B500DD3CE7 /* Rehapp WatchApp Extension.appex */;
+			productType = "com.apple.product-type.watchkit2-extension";
+		};
 		086DC6501B418FCE00A7BAFF /* Rehapp */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 086DC6731B418FCF00A7BAFF /* Build configuration list for PBXNativeTarget "Rehapp" */;
@@ -225,10 +367,12 @@
 				086DC64D1B418FCE00A7BAFF /* Sources */,
 				086DC64E1B418FCE00A7BAFF /* Frameworks */,
 				086DC64F1B418FCE00A7BAFF /* Resources */,
+				081879781BA732B500DD3CE7 /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				0818796F1BA732B500DD3CE7 /* PBXTargetDependency */,
 			);
 			name = Rehapp;
 			productName = Rehapp;
@@ -264,6 +408,12 @@
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Tim Haug";
 				TargetAttributes = {
+					081879551BA732B400DD3CE7 = {
+						CreatedOnToolsVersion = 7.0;
+					};
+					081879611BA732B500DD3CE7 = {
+						CreatedOnToolsVersion = 7.0;
+					};
 					086DC6501B418FCE00A7BAFF = {
 						CreatedOnToolsVersion = 6.3.2;
 					};
@@ -288,11 +438,30 @@
 			targets = (
 				086DC6501B418FCE00A7BAFF /* Rehapp */,
 				086DC6681B418FCE00A7BAFF /* RehappTests */,
+				081879551BA732B400DD3CE7 /* Rehapp WatchApp */,
+				081879611BA732B500DD3CE7 /* Rehapp WatchApp Extension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		081879541BA732B400DD3CE7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0818795C1BA732B400DD3CE7 /* Assets.xcassets in Resources */,
+				0818795A1BA732B400DD3CE7 /* Interface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		081879601BA732B500DD3CE7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0818796C1BA732B500DD3CE7 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		086DC64F1B418FCE00A7BAFF /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -314,17 +483,31 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		0818795E1BA732B500DD3CE7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0818796A1BA732B500DD3CE7 /* ExtensionDelegate.swift in Sources */,
+				081879681BA732B500DD3CE7 /* InterfaceController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		086DC64D1B418FCE00A7BAFF /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				086DC6821B419C2500A7BAFF /* BLEHelper.m in Sources */,
+				08C8E7511BB06B2D00AABB7D /* OneLegHopAlgorithmResultViewController.swift in Sources */,
+				08C8E74B1BB03A9600AABB7D /* OneLegHopAlgorithm.swift in Sources */,
+				08C8E74D1BB05BF900AABB7D /* AlgorithmsViewController.swift in Sources */,
 				081879521BA7082100DD3CE7 /* RecordInfoViewController.swift in Sources */,
 				086DC6811B419C2500A7BAFF /* BLEDiscovery.m in Sources */,
 				086DC6921B41A05C00A7BAFF /* SensorDataDelegate.swift in Sources */,
 				080D95F71B53E2730056EC69 /* SwiftyJSON.swift in Sources */,
 				086DC6861B419D2800A7BAFF /* ArduinoCommunicationManager.swift in Sources */,
+				0859D2931BB44E5B00219683 /* SideHopsAlgorithmResultViewController.swift in Sources */,
 				086DC65C1B418FCE00A7BAFF /* JumpRecordViewController.swift in Sources */,
+				08C8E74F1BB05E5900AABB7D /* OneLegHopAlgorithmSettingsViewController.swift in Sources */,
 				086DC69D1B41B18800A7BAFF /* FileHandler.swift in Sources */,
 				086DC6831B419C2500A7BAFF /* BLEService.m in Sources */,
 				002AE9121B8B9C4D00E552DE /* Chart.swift in Sources */,
@@ -333,8 +516,10 @@
 				08F667601B54FC5600E66A4F /* RecordingDetailViewController.swift in Sources */,
 				086DC6571B418FCE00A7BAFF /* AppDelegate.swift in Sources */,
 				086DC65A1B418FCE00A7BAFF /* Rehapp.xcdatamodeld in Sources */,
+				0859D28F1BB34B3200219683 /* SideHopsAlgorithm.swift in Sources */,
 				086DC6961B41A18500A7BAFF /* SensorData.swift in Sources */,
 				08335C351B9F250B00F29C5B /* Record.swift in Sources */,
+				0859D2911BB44E4400219683 /* SideHopsAlgorithmSettingsViewController.swift in Sources */,
 				002AE9131B8B9C4D00E552DE /* ChartColors.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -350,6 +535,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		081879651BA732B500DD3CE7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 081879611BA732B500DD3CE7 /* Rehapp WatchApp Extension */;
+			targetProxy = 081879641BA732B500DD3CE7 /* PBXContainerItemProxy */;
+		};
+		0818796F1BA732B500DD3CE7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 081879551BA732B400DD3CE7 /* Rehapp WatchApp */;
+			targetProxy = 0818796E1BA732B500DD3CE7 /* PBXContainerItemProxy */;
+		};
 		086DC66B1B418FCF00A7BAFF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 086DC6501B418FCE00A7BAFF /* Rehapp */;
@@ -358,6 +553,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		081879581BA732B400DD3CE7 /* Interface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				081879591BA732B400DD3CE7 /* Base */,
+			);
+			name = Interface.storyboard;
+			sourceTree = "<group>";
+		};
 		086DC65D1B418FCE00A7BAFF /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -377,6 +580,68 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		081879721BA732B500DD3CE7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				INFOPLIST_FILE = "Rehapp WatchApp Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = TH.Rehapp.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Debug;
+		};
+		081879731BA732B500DD3CE7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = "Rehapp WatchApp Extension/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = TH.Rehapp.watchkitapp.watchkitextension;
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Release;
+		};
+		081879761BA732B500DD3CE7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				IBSC_MODULE = Rehapp_WatchApp_Extension;
+				INFOPLIST_FILE = "Rehapp WatchApp/Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = TH.Rehapp.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Debug;
+		};
+		081879771BA732B500DD3CE7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				IBSC_MODULE = Rehapp_WatchApp_Extension;
+				INFOPLIST_FILE = "Rehapp WatchApp/Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = TH.Rehapp.watchkitapp;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
+			};
+			name = Release;
+		};
 		086DC6711B418FCF00A7BAFF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -470,6 +735,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Rehapp/Rehapp-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -483,6 +749,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "TH.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Rehapp/Rehapp-Bridging-Header.h";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
@@ -525,6 +792,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		081879711BA732B500DD3CE7 /* Build configuration list for PBXNativeTarget "Rehapp WatchApp Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				081879721BA732B500DD3CE7 /* Debug */,
+				081879731BA732B500DD3CE7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		081879751BA732B500DD3CE7 /* Build configuration list for PBXNativeTarget "Rehapp WatchApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				081879761BA732B500DD3CE7 /* Debug */,
+				081879771BA732B500DD3CE7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		086DC64C1B418FCE00A7BAFF /* Build configuration list for PBXProject "Rehapp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

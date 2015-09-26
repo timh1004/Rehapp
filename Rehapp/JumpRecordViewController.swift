@@ -8,8 +8,11 @@
 
 import UIKit
 import QuartzCore
+import WatchConnectivity
 
 class JumpRecordViewController: UIViewController, UITextFieldDelegate, SensorDataDelegate {
+    
+    private let session: WCSession? = WCSession.isSupported() ? WCSession.defaultSession() : nil
     
     var startDate: NSDate?
     var endDate: NSDate?
@@ -42,9 +45,27 @@ class JumpRecordViewController: UIViewController, UITextFieldDelegate, SensorDat
     let nextField = [1:2, 2:3, 3:4, 4:5]
     var jumpDistanceInCm = 0
     var jumpCount = 0
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        
+        configureWCSession()
+    }
+    
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        
+        configureWCSession()
+    }
+    
+    private func configureWCSession() {
+        session?.delegate = self;
+        session?.activateSession()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         sensor1ForceView.layer.cornerRadius = 25
         sensor2ForceView.layer.cornerRadius = 25
         sensor3ForceView.layer.cornerRadius = 25
@@ -103,10 +124,16 @@ class JumpRecordViewController: UIViewController, UITextFieldDelegate, SensorDat
     }
 
 
-    @IBAction func startStopRecording(sender: UIButton) {
-        let title:String = self.isCollectingData ? "Start Recording" : "Stop Recording"
-        sender.setTitle(title, forState: .Normal)
+    @IBAction func startStopButtonPressed(sender: UIButton) {
+//        let title:String = self.isCollectingData ? "Start Recording" : "Stop Recording"
+//        sender.setTitle(title, forState: .Normal)
+        self.startStopRecording()
+    }
+    
+    func startStopRecording() {
         if (self.isCollectingData) {
+            
+            startStopRecordingButton.setTitle("Start Recording", forState: .Normal)
             //            self.communicationManager.sensorDataDelegate = nil
             //            self.communicationManager.stopReceivingSensorData()
             self.isCollectingData = false
@@ -123,6 +150,7 @@ class JumpRecordViewController: UIViewController, UITextFieldDelegate, SensorDat
             
             //            onSuccess()
         } else {
+            startStopRecordingButton.setTitle("Stop Recording", forState: .Normal)
             
             //                self.communicationManager.sensorDataDelegate = self
             //                self.communicationManager.startReceivingSensorData()
@@ -132,18 +160,6 @@ class JumpRecordViewController: UIViewController, UITextFieldDelegate, SensorDat
             //                onSuccess()
             
         }
-        
-        
-//        self.sensorDataSession.startStopMeasurement{
-//            self.isCollectingData = !self.isCollectingData
-//            let title:String = self.isCollectingData ? "Stop Recording" : "Start Recording"
-//            sender.setTitle(title, forState: .Normal)
-//            if (!self.isCollectingData) {
-//                self.measurementDidFinish()
-//            } else {
-//                self.sensorDataSession.resetData()
-//            }
-//        }
     }
     
     func displayDistanceAlertView() {
@@ -262,5 +278,36 @@ class JumpRecordViewController: UIViewController, UITextFieldDelegate, SensorDat
     }
 
 
+}
+
+// MARK: WCSessionDelegate
+extension JumpRecordViewController: WCSessionDelegate {
+    
+    func session(session: WCSession, didReceiveMessage message: [String : AnyObject], replyHandler: ([String : AnyObject]) -> Void) {
+        
+        var replyValues = Dictionary<String, AnyObject>()
+        
+        //Use this to update the UI instantaneously (otherwise, takes a little while)
+        dispatch_async(dispatch_get_main_queue()) {
+            
+            switch message["command"] as! String {
+            case "startStop" :
+                if self.startStopRecordingButton.enabled {
+                    
+                    self.startStopRecording()
+                    if self.isCollectingData {
+                        replyValues["status"] = "started"
+                    } else {
+                        replyValues["status"] = "stopped"
+                    }
+                } else {
+                   replyValues["status"] = "notConnected"
+                }
+            default:
+                break
+            }
+            replyHandler(replyValues)
+        }
+    }
 }
 
