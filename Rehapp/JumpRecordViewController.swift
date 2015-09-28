@@ -17,6 +17,7 @@ class JumpRecordViewController: UIViewController, UITextFieldDelegate, SensorDat
     var startDate: NSDate?
     var endDate: NSDate?
     
+    
     var isCollectingData = false
     var communicationManager = ArduinoCommunicationManager.sharedInstance
     
@@ -219,7 +220,6 @@ class JumpRecordViewController: UIViewController, UITextFieldDelegate, SensorDat
         let json = JSON(jumpDictionary)
         let jsonString = json.description
         FileHandler.writeToFile("\(self.jumpNumber()).json", content: jsonString)
-        
         setJumpNumber(jumpNumber()+1)
     }
     

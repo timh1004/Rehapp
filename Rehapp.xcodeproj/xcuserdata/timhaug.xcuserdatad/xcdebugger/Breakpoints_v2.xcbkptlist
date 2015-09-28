@@ -47,8 +47,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "215"
             endingLineNumber = "215"
-            landmarkName = "measurementDidFinish()"
-            landmarkType = "5">
+            landmarkName = "JumpRecordViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -122,11 +122,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Rehapp/RecordingsViewController.swift"
-            timestampString = "463931908.975101"
+            timestampString = "465140628.583779"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "58"
-            endingLineNumber = "58"
+            startingLineNumber = "69"
+            endingLineNumber = "69"
             landmarkName = "getRecordArray()"
             landmarkType = "5">
             <Locations>
@@ -170,11 +170,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Rehapp/RecordingsViewController.swift"
-            timestampString = "463931908.975101"
+            timestampString = "465140628.583779"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "53"
-            endingLineNumber = "53"
+            startingLineNumber = "64"
+            endingLineNumber = "64"
             landmarkName = "getRecordArray()"
             landmarkType = "5">
          </BreakpointContent>

@@ -29,6 +29,11 @@ class RecordingsViewController: UIViewController, UITableViewDelegate, UITableVi
     var sortedRecordArray: [Record]!
     var json: JSON!
     
+    var startThreshold: Int = 0
+    var endThreshold: Int = 0
+    var minThreshold: Int = 0
+    var maxThreshold: Int = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -37,6 +42,12 @@ class RecordingsViewController: UIViewController, UITableViewDelegate, UITableVi
         // Nur die JSON Files, sortieren nach aufsteigender Nummer
         
         sortedRecordArray = getRecordArray()
+        
+        startThreshold = NSUserDefaults.standardUserDefaults().integerForKey("startThreshold")
+        endThreshold = NSUserDefaults.standardUserDefaults().integerForKey("endThreshold")
+        
+        minThreshold = NSUserDefaults.standardUserDefaults().integerForKey("minThreshold")
+        maxThreshold = NSUserDefaults.standardUserDefaults().integerForKey("maxThreshold")
         
     }
     
@@ -91,15 +102,26 @@ class RecordingsViewController: UIViewController, UITableViewDelegate, UITableVi
         
         if sortedRecordArray[indexPath.row].isSideHops {
             exercise = "Side Hops"
-            cellText = "ID: \(sortedRecordArray[indexPath.row].id) - \(exercise) - \(foot) Foot - Jump count: \(sortedRecordArray[indexPath.row].jumpCount)"
+            
+            cellText = "ID: \(sortedRecordArray[indexPath.row].id) - \(exercise) - \(foot) Foot - Jump count: \(sortedRecordArray[indexPath.row].jumpCount), Calculated Jump count: \(SideHopsAlgorithm.calculateJumpCount((sortedRecordArray[indexPath.row]), minThreshold: minThreshold, maxThreshold: maxThreshold)) "
+            
+            
         } else {
             exercise = "One-Leg Hop"
-            cellText = "ID: \(sortedRecordArray[indexPath.row].id) - \(exercise) - \(foot) Foot - Distance: \(sortedRecordArray[indexPath.row].jumpDistanceInCm) cm - Calculated jump duration: \(OneLegHopAlgorithm.calculateResult(sortedRecordArray[indexPath.row])) ms"
-            print("jumpDuration: \(OneLegHopAlgorithm.calculateResult(sortedRecordArray[indexPath.row]))")
+            
+            let calculatedJumpDuration = (OneLegHopAlgorithm.calculateResult((sortedRecordArray[indexPath.row]), startThreshold: startThreshold, endThreshold: endThreshold))
+            
+            cellText = "ID: \(sortedRecordArray[indexPath.row].id) - \(exercise) - \(foot) Foot - Distance: \(sortedRecordArray[indexPath.row].jumpDistanceInCm) cm - Calculated jump duration: \(calculatedJumpDuration) ms"
+            
+            print(OneLegHopAlgorithm.calculateResultDict((sortedRecordArray[indexPath.row]), startThreshold: startThreshold, endThreshold: endThreshold))
+            
+
+            
         }
         
         cell.textLabel?.text = cellText
-        cell.detailTextLabel?.text = "Name: \(sortedRecordArray[indexPath.row].name), Creation date: \(dateFormater.stringFromDate(creationDate))"
+        cell.detailTextLabel?.text = "Name: \(sortedRecordArray[indexPath.row].name), Creation date: \(dateFormater.stringFromDate(creationDate)), Jump Duration: \(sortedRecordArray[indexPath.row].jumpDurationInMs)"
+        
         
         return cell
     }

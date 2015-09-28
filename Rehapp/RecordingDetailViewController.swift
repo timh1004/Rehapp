@@ -41,7 +41,6 @@ class RecordingDetailViewController: UIViewController, ChartDelegate {
     var sensor2Array = [Float]()
     var sensor3Array = [Float]()
     var jumpArray = [Float]()
-    
     var creationDateArray = [String]()
     
     var startInterval: NSTimeInterval!
@@ -72,7 +71,6 @@ class RecordingDetailViewController: UIViewController, ChartDelegate {
         sensor3Label.textColor = ChartColors.redColor()
         
         self.title = "\(record.id).json"
-        
         self.navigationItem.setRightBarButtonItem(UIBarButtonItem(image: UIImage(named: "info-icon"), style: .Plain, target: self, action: "barButtonItemClicked:"), animated: true)
         
         if let dataFromString = FileHandler.readFromFile(fileName).dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false) {
